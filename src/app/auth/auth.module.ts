@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthRoutingModule } from './auth-routing.module';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { MaterialModule } from '../shared/material.module';
-// import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @NgModule({
@@ -13,8 +13,10 @@ import { MaterialModule } from '../shared/material.module';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    // MatFormFieldModule,
+    MatFormFieldModule,
     MaterialModule,
+    ReactiveFormsModule,
+
   ]
 })
 export class AuthModule { }
