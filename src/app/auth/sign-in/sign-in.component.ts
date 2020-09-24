@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service'
 
 
 @Component({
@@ -13,6 +14,8 @@ export class SignInComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private cookieService: CookieService,
+
   ) { }
 
   ngOnInit(): void {
