@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service'
+import { AuthserviceService } from 'src/app/services/authservice/authservice.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class SignInComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private cookieService: CookieService,
-
+    private authService: AuthserviceService,
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +28,13 @@ export class SignInComponent implements OnInit {
   }
 
   login(){
+    this.authService.loginRoot(this.loginForm.value['email'], this.loginForm.value['password']).subscribe(
+      (response:any)=>{
+        this.cookieService.set('token', response.token);
+        localStorage.setItem('token', response.token);
+        // console.log(response);
+      }
+    )
     // console.log(this.loginForm);
   }
 

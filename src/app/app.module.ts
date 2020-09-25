@@ -10,6 +10,8 @@ import { HeaderComponent } from './shared/header/header.component';
 // import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './shared/material.module'
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { AuthserviceService } from './services/authservice/authservice.service'
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -24,9 +26,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserAnimationsModule,
     FlexLayoutModule,
     // SharedModule
-    MaterialModule
+    MaterialModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [AuthserviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
