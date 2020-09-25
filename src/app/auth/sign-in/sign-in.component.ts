@@ -11,6 +11,7 @@ import { CookieService } from 'ngx-cookie-service'
 export class SignInComponent implements OnInit {
 
   loginForm: FormGroup;
+  hide = true;
 
   constructor(
     private fb: FormBuilder,
@@ -23,6 +24,10 @@ export class SignInComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     })
+  }
+
+  login(){
+    // console.log(this.loginForm);
   }
 
 }
