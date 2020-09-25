@@ -1,3 +1,4 @@
+<div>
 <form (ngSubmit)="register()" [formGroup]='registrationForm' class="uf-auth-form-body">
 
     <mat-form-field appearance="outline" class="uf-auth-input-block">
@@ -50,3 +51,20 @@
     </div>
     <br>
 </form>
+</div>
+
+<div *ngIf="registrationSuccessful" >
+    Success Message
+    <!-- Registration Successful -->
+    <!-- {{message}} -->
+</div>
+
+<div *ngIf="!registrationSuccessful">
+    <!-- {{message}} -->
+    <div *ngIf="userActive">
+        User is active and can log in
+    </div>
+    <div *ngIf="!userActive">
+        User is inactive
+    </div>
+</div>

@@ -18,6 +18,11 @@ export class SignUpComponent implements OnInit {
   ) { }
 
   user;
+  registering;
+  registrationSuccessful;
+  message;
+  userActive;
+
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -28,6 +33,7 @@ export class SignUpComponent implements OnInit {
   }
 
   register() {
+    this.registering = true;
     this.user = {};
     this.user["email"] = this.registrationForm.value["email"];
     this.user["first_name"] = this.registrationForm.value["full_name"].split(" ")[0];
@@ -36,9 +42,16 @@ export class SignUpComponent implements OnInit {
     this.user["domain"] = this.registrationForm.value["company"];
     this.authService.registerRoot(this.user).subscribe(
       (response: any) => {
-        console.log(response);
+        // console.log(response);
+        this.registering = false;
+        this.registrationSuccessful = true;
+        this.message = response.message;
       }, error => {
+        this.message = error.error.message; 
         console.log(error);
+        this.registering = false;
+        this.userActive = error.error.ua;
+        this.registrationSuccessful = false;
       }
     )
     console.log("register")
