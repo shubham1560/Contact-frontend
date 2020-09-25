@@ -24,6 +24,8 @@ export class AuthserviceService {
   logout(){
     this.cookieService.delete('token');
     localStorage.removeItem('token');
+    window.location.href = "welcome"
+    // window.window.location.href = "welcome";
   }
   
   loginRoot(username, password) {

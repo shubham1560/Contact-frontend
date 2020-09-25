@@ -6,6 +6,11 @@ const routes: Routes = [
     path: "auth",
     loadChildren: ()=> 
       import('././auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path: "",
+    loadChildren: ()=>
+      import('././landing/landing.module').then(m => m.LandingModule)
   }
 ];
 
