@@ -37,6 +37,22 @@ export class AuthserviceService {
     return this.httpService.post(url, body, { headers: this.header });
   }
 
+  registerRoot(user){
+    const registration_body = {
+      "username": user["email"],
+      "password": user["password"],
+      "first_name": user["first_name"],
+      "last_name": user["last_name"],
+      "domain": user["domain"],
+    }
+
+    const body = JSON.stringify(registration_body);
+    const url = `${this.base_auth_url}user/register/system/`;
+    this.body = body;
+    this.url = url;
+    return this.httpService.post(url, body, { headers: this.getHeader() });
+  }
+
   getHeader() {
     if (this.isLoggedIn()) {
       return this.getAuthenticationHeader();
