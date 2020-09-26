@@ -8,6 +8,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -22,8 +23,10 @@ import {MatMenuModule} from '@angular/material/menu';
     MatSortModule,
     MatIconModule,
     MatMenuModule,
+    MatDialogModule,
   ],
   exports:[
+    MatDialogModule,
     MatMenuModule,
     MatToolbarModule,
     MatFormFieldModule,

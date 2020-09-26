@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from 'src/app/services/contact/contact.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { PreferencesComponent } from '../preferences/preferences.component';
+
 
 export interface MessageTable{
   first_name: string;
@@ -31,7 +34,8 @@ export interface Preference{
 export class DataTableComponent implements OnInit {
 
   constructor(
-    private contactService: ContactService
+    private contactService: ContactService,
+    public dialog: MatDialog,
   ) { }
 
   tableData: MessageTable[];
@@ -44,16 +48,19 @@ export class DataTableComponent implements OnInit {
   start = 0
   chosenWindow = 10;
   end = this.start+this.chosenWindow;
+  domain;
   ngOnInit(): void {
     this.contactService.getContactUsList(this.start, this.end).subscribe(
       (response:any) => {
         this.tableData = response.list;
         this.preference = response.preference[0];
+        this.domain = this.preference
         var result = this.getPreferenceArray(this.preference);
         this.displayedColumns = result["backend_field"]
         this.labelColumns = result["display_field"]
       }
     )
+    // console.log(this);
   }
 
   getPreferenceArray(preference: Preference) : {} {
@@ -105,7 +112,18 @@ export class DataTableComponent implements OnInit {
   }
   
   openPreferenceModal(){
-    console.log("called");
+
+    // Get the domain from the user
+    // console.log("called");
+    const dialogRef = this.dialog.open( PreferencesComponent, {
+      width: '250px',
+      data: {every: this}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
   }
 
 }
