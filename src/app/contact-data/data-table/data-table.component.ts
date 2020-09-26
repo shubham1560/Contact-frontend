@@ -117,11 +117,11 @@ export class DataTableComponent implements OnInit {
     // console.log("called");
     const dialogRef = this.dialog.open( PreferencesComponent, {
       width: '250px',
-      data: {every: this}
+      data: {preferences: this.preference}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
       // this.animal = result;
     });
   }
