@@ -1,13 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from 'src/app/services/contact/contact.service';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
 export interface MessageTable{
   first_name: string;
   last_name: string;
@@ -48,14 +41,15 @@ export class DataTableComponent implements OnInit {
   columnsToDisplay: string[];
   displayField: any[];
   labelColumns;
+  start = 0
+  chosenWindow = 10;
+  end = this.start+this.chosenWindow;
   ngOnInit(): void {
-    this.contactService.getContactUsList().subscribe(
+    this.contactService.getContactUsList(this.start, this.end).subscribe(
       (response:any) => {
-        // console.log("called");
         this.tableData = response.list;
         this.preference = response.preference[0];
-        // console.log(response);
-        var result = this.getPreferenceArray(this.preference)
+        var result = this.getPreferenceArray(this.preference);
         this.displayedColumns = result["backend_field"]
         this.labelColumns = result["display_field"]
       }
@@ -101,6 +95,17 @@ export class DataTableComponent implements OnInit {
     displayField.push("Message Timing")
     return {"backend_field": arr, "display_field": displayField};
   }
+
+  chooseWindow(value){
+    this.chosenWindow = value;
+    // console.log("called");
+    this.end = this.start + this.chosenWindow
+    
+    this.ngOnInit();
+  }
   
+  openPreferenceModal(){
+    console.log("called");
+  }
 
 }

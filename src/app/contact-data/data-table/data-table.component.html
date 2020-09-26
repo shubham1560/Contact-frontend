@@ -1,23 +1,47 @@
 <div class="container">
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th *ngFor="let column of labelColumns">{{column}}</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let message of tableData">
-                    <td *ngFor="let column of displayedColumns">{{message[column]}}</td>
-                    <td>
-                        <mat-icon>label_important</mat-icon>
-                        <mat-icon>delete</mat-icon>
-                        Actions
-                    </td>
+    <div class="row">
+        <br><br>
+        <div class="col-md-12">
+            <mat-icon (click)="openPreferenceModal">
+                settings
+            </mat-icon>
+            <span style="float: right; cursor: pointer;" mat-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+            </span>
+            <mat-menu #menu="matMenu" xPosition="before">
+                <button mat-menu-item>Show up to</button>
+                <div>
+                    <button mat-menu-item (click)=chooseWindow(10) style="line-height: 20px; height: 30px;">10 items</button>
+                    <button mat-menu-item (click)=chooseWindow(50) style="line-height: 20px; height: 30px;">50 items</button>
+                    <button mat-menu-item (click)=chooseWindow(100) style="line-height: 20px; height: 30px;">100 items</button>
+                </div>
+                <!-- <button mat-menu-item>10</button> -->
+            </mat-menu>
+        </div>
+        <br><br>
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th *ngFor="let column of labelColumns">{{column}}</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let message of tableData">
+                            <td *ngFor="let column of displayedColumns">{{message[column]}}</td>
+                            <td>
+                                <mat-icon>label_important</mat-icon>
+                                <mat-icon>delete</mat-icon>
+                                <!-- Actions -->
+                            </td>
 
-                </tr>
-            </tbody>
-        </table>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+
 </div>
