@@ -54,7 +54,7 @@ export class DataTableComponent implements OnInit {
       (response: any) => {
         this.tableData = response.list;
         this.preference = response.preference[0];
-        if(!this.preference){
+        if (!this.preference) {
           this.preference = {
             first_name: true,
             last_name: true,
@@ -81,39 +81,39 @@ export class DataTableComponent implements OnInit {
     var arr = [];
     var displayField = [];
     // if (preference) {
-      if (preference.anything_else == true) {
-        arr.push("anything_else");
-        displayField.push("Anything Else");
-      }
-      if (preference.email == true) {
-        arr.push("email");
-        displayField.push("Email");
-      }
-      if (preference.first_name == true) {
-        arr.push("first_name");
-        displayField.push("First Name");
-      }
-      if (preference.last_name == true) {
-        arr.push("last_name");
-        displayField.push("Last Name");
-      }
-      if (preference.message == true) {
-        arr.push("message");
-        displayField.push("Message");
-      }
-      if (preference.name == true) {
-        arr.push("name");
-        displayField.push("Name");
-      }
-      if (preference.phone_number == true) {
-        arr.push("phone_number");
-        displayField.push("Phone Number");
-      }
-      if (preference.subject == true) {
-        arr.push("subject");
-        displayField.push("Subject");
-      }
-      arr.push("sys_created_on");
+    if (preference.anything_else == true) {
+      arr.push("anything_else");
+      displayField.push("Anything Else");
+    }
+    if (preference.email == true) {
+      arr.push("email");
+      displayField.push("Email");
+    }
+    if (preference.first_name == true) {
+      arr.push("first_name");
+      displayField.push("First Name");
+    }
+    if (preference.last_name == true) {
+      arr.push("last_name");
+      displayField.push("Last Name");
+    }
+    if (preference.message == true) {
+      arr.push("message");
+      displayField.push("Message");
+    }
+    if (preference.name == true) {
+      arr.push("name");
+      displayField.push("Name");
+    }
+    if (preference.phone_number == true) {
+      arr.push("phone_number");
+      displayField.push("Phone Number");
+    }
+    if (preference.subject == true) {
+      arr.push("subject");
+      displayField.push("Subject");
+    }
+    arr.push("sys_created_on");
     // }
     // else{
     //   arr = ["anything_else", 'email', 'name', 'first_name', 'last_name', 'subject', 'message', 'phone_number', 'sys_created_on'];
@@ -141,8 +141,13 @@ export class DataTableComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
-      // this.animal = result;
+      console.log('The dialog was closed');
+      // console.log(result);
+      // this.getPreferenceArray(result);
+      this.preference = result;
+      var result: any = this.getPreferenceArray(result);
+      this.displayedColumns = result["backend_field"]
+      this.labelColumns = result["display_field"]
     });
   }
 

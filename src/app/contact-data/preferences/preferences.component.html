@@ -27,7 +27,7 @@ Showing fields:
     <div class="checkbox">
         <label><input type="checkbox" formControlName="phone_number">Phone Number</label>
     </div>
-    <button mat-raised-button color="primary" style="text-align: right;" type="submit">        
+    <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="preferenceForm.value">        
         <span>Save</span>
         <!-- <mat-icon matSuffix style="margin: 0px 8px;">login</mat-icon> -->
     </button>
