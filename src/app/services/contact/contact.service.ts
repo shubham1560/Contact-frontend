@@ -26,4 +26,10 @@ export class ContactService {
     this.url = `${this.base_url_contact}get/${start}/${end}/`;
     return this.httpService.get(this.url, {headers: this.headers});
   }
+
+  changeUserDomainPreference(preference){
+    this.url = `${this.base_url}domain_preference/v1/domain_preference/`;
+    const body = preference;
+    return this.httpService.post(this.url, body, {headers: this.headers})
+  }
 }

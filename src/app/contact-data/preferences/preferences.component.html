@@ -1,5 +1,38 @@
-<p>preferences works!</p>
+<!-- <p>preferences works!</p> -->
+User Preferences:
 
+Showing fields:
+<form novalidate (submit)="changePreference()" [formGroup]="preferenceForm">
+    <div class="checkbox">
+        <label><input type="checkbox" formControlName="email">Email</label>
+    </div>
+    <div class="checkbox">
+        <label><input type="checkbox" formControlName="first_name">First Name</label>
+    </div>
+    <div class="checkbox">
+        <label><input type="checkbox" formControlName="last_name">Last Name</label>
+    </div>
+    <div class="checkbox">
+        <label><input type="checkbox" formControlName="name">Name</label>
+    </div>
+    <div class="checkbox">
+        <label><input type="checkbox" formControlName="subject">Subject</label>
+    </div>
+    <div class="checkbox">
+        <label><input type="checkbox" formControlName="message">Message</label>
+    </div>
+    <div class="checkbox">
+        <label><input type="checkbox" formControlName="anything_else">Anything Else</label>
+    </div>
+    <div class="checkbox">
+        <label><input type="checkbox" formControlName="phone_number">Phone Number</label>
+    </div>
+    <button mat-raised-button color="primary" style="text-align: right;" type="submit">        
+        <span>Save</span>
+        <!-- <mat-icon matSuffix style="margin: 0px 8px;">login</mat-icon> -->
+    </button>
+</form>
+<!-- 
 <pre>
     {{data | json}}
-</pre>
+</pre> -->
