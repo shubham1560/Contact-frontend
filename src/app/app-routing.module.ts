@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, NoPreloading } from '@angular/router';
 
 const routes: Routes = [
   {
@@ -11,11 +11,26 @@ const routes: Routes = [
     path: "",
     loadChildren: ()=>
       import('././landing/landing.module').then(m => m.LandingModule)
+  },
+  {
+    path: "console",
+    loadChildren: ()=>
+      import('././dev-console/dev-console.module').then(m => m.DevConsoleModule)
+  },
+  {
+    path: "dashboard",
+    loadChildren: ()=>
+      import('././contact-data/contact-data.module').then(m => m.ContactDataModule)
+  },
+  {
+    path: "docs",
+    loadChildren: ()=>
+      import('././product-docs/product-docs.module').then(m => m.ProductDocsModule)
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: false, preloadingStrategy: NoPreloading })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
