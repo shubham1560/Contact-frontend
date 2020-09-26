@@ -1,19 +1,23 @@
-<!-- <p>data-table works!</p> -->
+<div class="container">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th *ngFor="let column of labelColumns">{{column}}</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let message of tableData">
+                    <td *ngFor="let column of displayedColumns">{{message[column]}}</td>
+                    <td>
+                        <mat-icon>label_important</mat-icon>
+                        <mat-icon>delete</mat-icon>
+                        Actions
+                    </td>
 
-<pre>
-    {{tableData | json}}
-</pre>
-
-<button mat-raised-button (click)="addColumn()"> Add column </button>
-<button mat-raised-button (click)="removeColumn()"> Remove column </button>
-<button mat-raised-button (click)="shuffle()"> Shuffle </button>
-
-<table mat-table [dataSource]="data" class="mat-elevation-z8">
-  <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
-    <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-    <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-  <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-</table>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

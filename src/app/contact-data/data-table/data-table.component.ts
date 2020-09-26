@@ -19,19 +19,16 @@ export interface MessageTable{
   phone_number: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
-
+export interface Preference{
+  first_name: boolean;
+  last_name: boolean;
+  name: boolean;
+  email: boolean;
+  subject: boolean;
+  message: boolean;
+  anything_else: boolean;
+  phone_number: boolean;
+}
 
 @Component({
   selector: 'app-data-table',
@@ -43,43 +40,67 @@ export class DataTableComponent implements OnInit {
   constructor(
     private contactService: ContactService
   ) { }
-  displayedColumns: string[] = ['name', 'weight', 'symbol', 'position'];
-  columnsToDisplay: string[] = this.displayedColumns.slice();
-  data: PeriodicElement[] = ELEMENT_DATA;
 
-  addColumn() {
-    const randomColumn = Math.floor(Math.random() * this.displayedColumns.length);
-    this.columnsToDisplay.push(this.displayedColumns[randomColumn]);
-  }
-
-  removeColumn() {
-    if (this.columnsToDisplay.length) {
-      this.columnsToDisplay.pop();
-    }
-  }
-
-  shuffle() {
-    let currentIndex = this.columnsToDisplay.length;
-    while (0 !== currentIndex) {
-      let randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-
-      // Swap
-      let temp = this.columnsToDisplay[currentIndex];
-      this.columnsToDisplay[currentIndex] = this.columnsToDisplay[randomIndex];
-      this.columnsToDisplay[randomIndex] = temp;
-    }
-  }
-
-  tableData: MessageTable;
+  tableData: MessageTable[];
+  data: MessageTable[];
+  preference: Preference;
+  displayedColumns: string[] ;
+  columnsToDisplay: string[];
+  displayField: any[];
+  labelColumns;
   ngOnInit(): void {
     this.contactService.getContactUsList().subscribe(
       (response:any) => {
         // console.log("called");
-        this.tableData = response;
+        this.tableData = response.list;
+        this.preference = response.preference[0];
         // console.log(response);
+        var result = this.getPreferenceArray(this.preference)
+        this.displayedColumns = result["backend_field"]
+        this.labelColumns = result["display_field"]
       }
     )
   }
+
+  getPreferenceArray(preference: Preference) : {} {
+    var arr = [];
+    var displayField = [];
+    if (preference.anything_else == true){
+      arr.push("anything_else");
+      displayField.push("Anything Else");
+    }
+    if (preference.email == true){
+      arr.push("email");
+      displayField.push("Email");
+    }
+    if (preference.first_name == true){
+      arr.push("first_name");
+      displayField.push("First Name");
+    }
+    if (preference.last_name == true){
+      arr.push("last_name");
+      displayField.push("Last Name");
+    }
+    if(preference.message == true){
+      arr.push("message");
+      displayField.push("Message");
+    }
+    if(preference.name == true){
+      arr.push("name");
+      displayField.push("Name");
+    }
+    if(preference.phone_number == true){
+      arr.push("phone_number");
+      displayField.push("Phone Number");
+    }
+    if(preference.subject == true){
+      arr.push("subject");
+      displayField.push("Subject");
+    }
+    arr.push("sys_created_on");
+    displayField.push("Message Timing")
+    return {"backend_field": arr, "display_field": displayField};
+  }
+  
 
 }
