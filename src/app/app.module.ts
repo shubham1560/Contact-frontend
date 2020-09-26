@@ -11,6 +11,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { MaterialModule } from './shared/material.module'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthserviceService } from './services/authservice/authservice.service'
+import { ContactService } from './services/contact/contact.service'
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -29,7 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     HttpClientModule,
   ],
-  providers: [AuthserviceService],
+  providers: [AuthserviceService, ContactService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

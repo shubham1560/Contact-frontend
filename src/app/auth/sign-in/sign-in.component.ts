@@ -32,7 +32,7 @@ export class SignInComponent implements OnInit {
       (response:any)=>{
         this.cookieService.set('token', response.token);
         localStorage.setItem('token', response.token);
-        window.location.href="welcome";
+        window.location.href="dashboard";
         // console.log(response);
       }
     )
