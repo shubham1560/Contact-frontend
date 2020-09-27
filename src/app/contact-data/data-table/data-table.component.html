@@ -13,11 +13,31 @@
                     refresh
                 </mat-icon>
             </button>
+            <!-- <b>Total Records: </b>{{rowCount}} -->
             <span *ngIf="isLoading">Loading...</span>
-            <button style="float: right; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu"
-                aria-label="Example icon button with a vertical three dot icon">
+            <button style="float: right; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
             </button>
+            <button [disabled]='start+windowDefault > rowCount' style="float: right;" mat-icon-button (click)="nextPage()">
+                <mat-icon>
+                    navigate_next
+                </mat-icon>
+            </button>
+            <button [disabled]='start==0' style="float: right;" mat-icon-button (click)="previousPage()">
+                <mat-icon>
+                    navigate_before
+                </mat-icon>
+            </button>
+
+            
+            <span style="float: right; padding-top: 10px;">
+                Showing {{start}} - {{start+windowDefault}} of <b> {{rowCount}} </b>
+            </span>
+            
+
+
+
+
             <mat-menu #menu="matMenu" xPosition="before">
                 <button mat-menu-item>Show up to</button>
                 <div>
@@ -38,7 +58,8 @@
                         <tr>
                             <th>
                                 <button mat-icon-button class="checkbox" class="d-inline">
-                                    <input type="checkbox" id="mastercheck" class="check" (click)="selectAll(tableData)" >
+                                    <input type="checkbox" id="mastercheck" class="check"
+                                        (click)="selectAll(tableData)">
                                 </button>
                                 Actions
                             </th>
@@ -50,45 +71,47 @@
                         <tr *ngFor="let message of tableData" class="table-row">
                             <td>
                                 <button mat-icon-button class="checkbox" class="d-inline">
-                                    <input type="checkbox" class="check" id={{message.id}} value={{message.id}} (click)="deletion(message.id)" >
+                                    <input type="checkbox" class="check" id={{message.id}} value={{message.id}}
+                                        (click)="deletion(message.id)">
                                 </button>
-                                <button mat-icon-button class="d-inline" *ngIf="message.important" (click)="mark('important', false, message.id)">
+                                <button mat-icon-button class="d-inline" *ngIf="message.important"
+                                    (click)="mark('important', false, message.id)">
                                     <mat-icon style="color: gold">
                                         label_important
                                     </mat-icon>
                                 </button>
-                                <button mat-icon-button class="d-inline" *ngIf="!message.important" (click)="mark('important',true, message.id)">
+                                <button mat-icon-button class="d-inline" *ngIf="!message.important"
+                                    (click)="mark('important',true, message.id)">
                                     <mat-icon style="color: #272727;">
                                         label_important
                                     </mat-icon>
                                 </button>
 
 
-                                <button mat-icon-button class="d-inline" *ngIf="message.starred" (click)="mark('starred', false, message.id)">
+                                <button mat-icon-button class="d-inline" *ngIf="message.starred"
+                                    (click)="mark('starred', false, message.id)">
                                     <mat-icon style="color: gold">
                                         star
                                     </mat-icon>
                                 </button>
-                                <button mat-icon-button class="d-inline" *ngIf="!message.starred" (click)="mark('starred', true, message.id)">
+                                <button mat-icon-button class="d-inline" *ngIf="!message.starred"
+                                    (click)="mark('starred', true, message.id)">
                                     <mat-icon style="color: #272727;">
                                         star_border
                                     </mat-icon>
                                 </button>
 
 
-                                <!-- <button mat-icon-button class="d-inline" (click)="delete()">
-                                    <mat-icon>
-                                        delete
-                                    </mat-icon>
-                                </button> -->
-                                
                             </td>
 
-                            <td (click)="mark('read', true, message.id)" class="table-row-open" *ngFor="let column of displayedColumns">
+                            <td (click)="mark('read', true, message.id)" class="table-row-open"
+                                *ngFor="let column of displayedColumns">
                                 <!-- {{)}} <br>   -->
-                                <span [ngStyle]="!message.read?{'font-weight': 'bold'} : {'font-weight': '100'}" *ngIf="dataType(message[column])=='date'">{{message[column] | date:'short'}}</span>
-                                <span [ngStyle]="!message.read?{'font-weight': 'bold'} : {'font-weight': '100'}" *ngIf="dataType(message[column])!='date'">{{message[column]}}</span>
-                                
+                                <span [ngStyle]="!message.read?{'font-weight': 'bold'} : {'font-weight': '100'}"
+                                    *ngIf="dataType(message[column])=='date'">{{message[column] | date:'short'}}</span>
+                                <span [ngStyle]="!message.read?{'font-weight': 'bold'} : {'font-weight': '100'}"
+                                    *ngIf="dataType(message[column])!='date'">{{message[column]}}</span>
+
                             </td>
                         </tr>
                     </tbody>

@@ -22,8 +22,8 @@ export class ContactService {
   url;
   body;
 
-  getContactUsList(start, end){
-    this.url = `${this.base_url_contact}get/${start}/${end}/`;
+  getContactUsList(start){
+    this.url = `${this.base_url_contact}get/${start}/`;
     return this.httpService.get(this.url, {headers: this.headers});
   }
 
@@ -42,6 +42,15 @@ export class ContactService {
     }
     console.log(this.url)
     console.log(body)
+    return this.httpService.post(this.url, body, {headers: this.headers});
+  }
+
+  changeUserDomainPreferenceWindow(field, value){
+    this.url = `${this.base_url}domain_preference/v1/domain_preference/change/`;
+    const body = {
+      field: field,
+      value: value
+    }
     return this.httpService.post(this.url, body, {headers: this.headers});
   }
 

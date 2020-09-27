@@ -48,17 +48,20 @@ export class DataTableComponent implements OnInit {
   displayField: any[];
   labelColumns;
   start = 0
-  chosenWindow = 10;
-  end = this.start + this.chosenWindow;
+  windowDefault;
+  // end = this.start + this.chosenWindow;
   domain;
   deleteArray = [];
   isLoading = true;
+  rowCount;
   ngOnInit(): void {
     this.isLoading = true;
-    this.contactService.getContactUsList(this.start, this.end).subscribe(
+    this.contactService.getContactUsList(this.start).subscribe(
       (response: any) => {
         this.tableData = response.list;
         this.preference = response.preference[0];
+        this.windowDefault = response.preference[0]["window"];
+        this.rowCount = response.row_count;
         if (!this.preference) {
           this.preference = {
             first_name: true,
@@ -70,6 +73,7 @@ export class DataTableComponent implements OnInit {
             phone_number: true,
             subject: true
           }
+          this.windowDefault = 50;
         }
         this.domain = this.preference
         var result = this.getPreferenceArray(this.preference);
@@ -126,9 +130,18 @@ export class DataTableComponent implements OnInit {
   }
 
   chooseWindow(value) {
-    this.chosenWindow = value;
-    this.end = this.start + this.chosenWindow;
-    this.ngOnInit();
+    this.contactService.changeUserDomainPreferenceWindow("window", value).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.windowDefault = value;
+        // this.start = this.start + this.windowDefault;
+        this.ngOnInit();
+      }, error => {
+        console.log(error);
+      }
+    )
+
+
   }
 
   openPreferenceModal() {
@@ -181,6 +194,16 @@ export class DataTableComponent implements OnInit {
     console.log(this.deleteArray);
   }
 
+  nextPage(){
+    this.start = this.start + this.windowDefault;
+    this.ngOnInit();
+  }
+
+  previousPage(){
+    this.start = this.start - this.windowDefault;
+    this.ngOnInit();
+  }
+
   mark(field, value, id) {
     // console.log(value, id);
     this.tableData.forEach(element => {
@@ -198,7 +221,6 @@ export class DataTableComponent implements OnInit {
     // console.log("mark Important")
   }
 
-
   dataType(value) {
     // return typeof(value);
     if (value) {
@@ -207,22 +229,6 @@ export class DataTableComponent implements OnInit {
     }
     return typeof (value)
   }
-
-  // markRead(value, id){
-  //   this.tableData.forEach(element => {
-  //     if(element["id"] == id){
-  //       element["read"] = value;
-  //     }
-  //   });
-  //   this.contactService.markReadMessage(value, id).subscribe(
-  //     (result: any) => {
-  //       console.log(result);
-  //     },
-  //     error =>{
-  //       console.log(error);
-  //     }
-  //   )
-  // }
 
   removeElement(arr, value) {
     const array = arr;
