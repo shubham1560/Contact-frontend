@@ -125,16 +125,12 @@ export class DataTableComponent implements OnInit {
 
   chooseWindow(value) {
     this.chosenWindow = value;
-    // console.log("called");
     this.end = this.start + this.chosenWindow
-
     this.ngOnInit();
   }
 
   openPreferenceModal() {
 
-    // Get the domain from the user
-    // console.log("called");
     const dialogRef = this.dialog.open(PreferencesComponent, {
       width: '250px',
       data: { preferences: this.preference }
@@ -152,20 +148,28 @@ export class DataTableComponent implements OnInit {
   }
 
 
-  selectAll(){
+  selectAll(messages) {
+    console.log(messages);
     console.log("select All");
+    if (document.getElementById("mastercheck")["checked"] == true) {
+      messages.forEach(element => {
+        document.getElementById(element.id)["checked"] = true;
+      });
+    } else {
+      messages.forEach(element => {
+        document.getElementById(element.id)["checked"] = false;
+      });
+    }
   }
 
   deletion(id) {
     console.log(id);
     if (document.getElementById(id)["checked"]) {
       this.deleteArray.push(id);
-
     }
     else {
-      this.deleteArray = this.removeElement(this.deleteArray,id);
+      this.deleteArray = this.removeElement(this.deleteArray, id);
     }
-
     console.log(this.deleteArray);
   }
 
