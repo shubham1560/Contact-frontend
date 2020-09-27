@@ -151,15 +151,19 @@ export class DataTableComponent implements OnInit {
   selectAll(messages) {
     console.log(messages);
     console.log("select All");
+    this.deleteArray = [];
     if (document.getElementById("mastercheck")["checked"] == true) {
       messages.forEach(element => {
         document.getElementById(element.id)["checked"] = true;
+        this.deleteArray.push(element.id);
       });
     } else {
       messages.forEach(element => {
         document.getElementById(element.id)["checked"] = false;
+        // this.deleteArray
       });
     }
+    // console.log(this.deleteArray);
   }
 
   deletion(id) {
@@ -171,6 +175,10 @@ export class DataTableComponent implements OnInit {
       this.deleteArray = this.removeElement(this.deleteArray, id);
     }
     console.log(this.deleteArray);
+  }
+
+  markImportant(){
+    console.log("mark Important")
   }
 
   removeElement(arr, value) {

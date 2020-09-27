@@ -52,20 +52,27 @@
                                 <button mat-icon-button class="checkbox" class="d-inline">
                                     <input type="checkbox" class="check" id={{message.id}} value={{message.id}} (click)="deletion(message.id)" >
                                 </button>
-                                <button mat-icon-button class="d-inline" (click)="markImportant()">
-                                    <mat-icon>
+                                <button mat-icon-button class="d-inline" *ngIf="message.important" (click)="markImportant()">
+                                    <mat-icon style="color: gold">
                                         label_important
                                     </mat-icon>
                                 </button>
-                                <button mat-icon-button class="d-inline" (click)="delete()">
+                                <button mat-icon-button class="d-inline" *ngIf="!message.important" (click)="markImportant()">
+                                    <mat-icon style="color: #272727;">
+                                        label_important
+                                    </mat-icon>
+                                </button>
+                                <!-- <button mat-icon-button class="d-inline" (click)="delete()">
                                     <mat-icon>
                                         delete
                                     </mat-icon>
-                                </button>
+                                </button> -->
                                 
                             </td>
 
-                            <td (click)="openForm()" *ngFor="let column of displayedColumns">{{message[column]}}</td>
+                            <td (click)="openForm()" class="table-row-open" *ngFor="let column of displayedColumns">
+                                <span [ngStyle]="!message.read?{'font-weight': 'bold'} : {'font-weight': '100'}">{{message[column]}}</span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

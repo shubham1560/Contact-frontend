@@ -1,0 +1,15 @@
+.table-row{
+    // background-color: black;
+
+    &:hover{
+        background-color: #f5f5f5;
+    }
+}
+
+.table-row-open{
+    cursor: pointer;
+}
+
+.row-read{
+    background-color: #f3f3f3;
+}
