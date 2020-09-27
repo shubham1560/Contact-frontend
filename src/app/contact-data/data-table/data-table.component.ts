@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ContactService } from 'src/app/services/contact/contact.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PreferencesComponent } from '../preferences/preferences.component';
+import { ConsoleComponent } from 'src/app/dev-console/console.component';
 
 
 export interface MessageTable {
@@ -126,7 +127,7 @@ export class DataTableComponent implements OnInit {
 
   chooseWindow(value) {
     this.chosenWindow = value;
-    this.end = this.start + this.chosenWindow
+    this.end = this.start + this.chosenWindow;
     this.ngOnInit();
   }
 
@@ -141,10 +142,12 @@ export class DataTableComponent implements OnInit {
       console.log('The dialog was closed');
       // console.log(result);
       // this.getPreferenceArray(result);
-      this.preference = result;
-      var result: any = this.getPreferenceArray(result);
-      this.displayedColumns = result["backend_field"]
-      this.labelColumns = result["display_field"]
+      if (result) {
+        this.preference = result;
+        var result: any = this.getPreferenceArray(result);
+        this.displayedColumns = result["backend_field"]
+        this.labelColumns = result["display_field"]
+      }
     });
   }
 
@@ -178,8 +181,21 @@ export class DataTableComponent implements OnInit {
     console.log(this.deleteArray);
   }
 
-  markImportant() {
-    console.log("mark Important")
+  mark(field, value, id) {
+    // console.log(value, id);
+    this.tableData.forEach(element => {
+      if (element["id"] == id) {
+        element[field] = value;
+      }
+    });
+    this.contactService.markMessage(field, value, id).subscribe(
+      (result: any) => {
+        console.log(result);
+      }, error => {
+        console.log(error);
+      }
+    )
+    // console.log("mark Important")
   }
 
 
@@ -191,6 +207,22 @@ export class DataTableComponent implements OnInit {
     }
     return typeof (value)
   }
+
+  // markRead(value, id){
+  //   this.tableData.forEach(element => {
+  //     if(element["id"] == id){
+  //       element["read"] = value;
+  //     }
+  //   });
+  //   this.contactService.markReadMessage(value, id).subscribe(
+  //     (result: any) => {
+  //       console.log(result);
+  //     },
+  //     error =>{
+  //       console.log(error);
+  //     }
+  //   )
+  // }
 
   removeElement(arr, value) {
     const array = arr;

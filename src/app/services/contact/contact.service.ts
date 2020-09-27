@@ -32,4 +32,28 @@ export class ContactService {
     const body = preference;
     return this.httpService.post(this.url, body, {headers: this.headers})
   }
+
+  markMessage(field, value, id){
+    this.url = `${this.base_url_contact}change/`;
+    const body = {
+      field: field,
+      value: value,
+      id: id,
+    }
+    console.log(this.url)
+    console.log(body)
+    return this.httpService.post(this.url, body, {headers: this.headers});
+  }
+
+  // markReadMessage(value, id){
+  //   this.url = `${this.base_url_contact}change/`;
+  //   const body = {
+  //     field: "read",
+  //     value: value,
+  //     id: id,
+  //   }
+  //   console.log(this.url)
+  //   console.log(body)
+  //   return this.httpService.post(this.url, body, {headers: this.headers});
+  // }
 }

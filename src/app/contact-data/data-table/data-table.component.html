@@ -52,16 +52,30 @@
                                 <button mat-icon-button class="checkbox" class="d-inline">
                                     <input type="checkbox" class="check" id={{message.id}} value={{message.id}} (click)="deletion(message.id)" >
                                 </button>
-                                <button mat-icon-button class="d-inline" *ngIf="message.important" (click)="markImportant()">
+                                <button mat-icon-button class="d-inline" *ngIf="message.important" (click)="mark('important', false, message.id)">
                                     <mat-icon style="color: gold">
                                         label_important
                                     </mat-icon>
                                 </button>
-                                <button mat-icon-button class="d-inline" *ngIf="!message.important" (click)="markImportant()">
+                                <button mat-icon-button class="d-inline" *ngIf="!message.important" (click)="mark('important',true, message.id)">
                                     <mat-icon style="color: #272727;">
                                         label_important
                                     </mat-icon>
                                 </button>
+
+
+                                <button mat-icon-button class="d-inline" *ngIf="message.starred" (click)="mark('starred', false, message.id)">
+                                    <mat-icon style="color: gold">
+                                        star
+                                    </mat-icon>
+                                </button>
+                                <button mat-icon-button class="d-inline" *ngIf="!message.starred" (click)="mark('starred', true, message.id)">
+                                    <mat-icon style="color: #272727;">
+                                        star_border
+                                    </mat-icon>
+                                </button>
+
+
                                 <!-- <button mat-icon-button class="d-inline" (click)="delete()">
                                     <mat-icon>
                                         delete
@@ -70,7 +84,7 @@
                                 
                             </td>
 
-                            <td (click)="openForm()" class="table-row-open" *ngFor="let column of displayedColumns">
+                            <td (click)="mark('read', true, message.id)" class="table-row-open" *ngFor="let column of displayedColumns">
                                 <!-- {{)}} <br>   -->
                                 <span [ngStyle]="!message.read?{'font-weight': 'bold'} : {'font-weight': '100'}" *ngIf="dataType(message[column])=='date'">{{message[column] | date:'short'}}</span>
                                 <span [ngStyle]="!message.read?{'font-weight': 'bold'} : {'font-weight': '100'}" *ngIf="dataType(message[column])!='date'">{{message[column]}}</span>
