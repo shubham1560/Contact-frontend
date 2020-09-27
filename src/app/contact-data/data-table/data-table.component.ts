@@ -22,10 +22,10 @@ export interface Preference {
   last_name: boolean;
   name: boolean;
   email: boolean;
+  phone_number: boolean;
   subject: boolean;
   message: boolean;
   anything_else: boolean;
-  phone_number: boolean;
 }
 
 @Component({
@@ -91,38 +91,47 @@ export class DataTableComponent implements OnInit {
     var arr = [];
     var displayField = [];
 
-    if (preference.anything_else == true) {
-      arr.push("anything_else");
-      displayField.push("Anything Else");
-    }
-    if (preference.email == true) {
-      arr.push("email");
-      displayField.push("Email");
-    }
+    
     if (preference.first_name == true) {
       arr.push("first_name");
       displayField.push("First Name");
     }
+    
     if (preference.last_name == true) {
       arr.push("last_name");
       displayField.push("Last Name");
     }
-    if (preference.message == true) {
-      arr.push("message");
-      displayField.push("Message");
-    }
+
     if (preference.name == true) {
       arr.push("name");
       displayField.push("Name");
     }
+
+    if (preference.email == true) {
+      arr.push("email");
+      displayField.push("Email");
+    }
+
     if (preference.phone_number == true) {
       arr.push("phone_number");
       displayField.push("Phone Number");
     }
+
     if (preference.subject == true) {
       arr.push("subject");
       displayField.push("Subject");
     }
+
+    if (preference.message == true) {
+      arr.push("message");
+      displayField.push("Message");
+    }
+
+    if (preference.anything_else == true) {
+      arr.push("anything_else");
+      displayField.push("Anything Else");
+    }
+
     arr.push("sys_created_on");
 
     displayField.push("Received on")
@@ -140,8 +149,6 @@ export class DataTableComponent implements OnInit {
         console.log(error);
       }
     )
-
-
   }
 
   openPreferenceModal() {
