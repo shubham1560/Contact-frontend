@@ -49,7 +49,10 @@ export class DataTableComponent implements OnInit {
   chosenWindow = 10;
   end = this.start + this.chosenWindow;
   domain;
+  deleteArray = [];
+  isLoading = true;
   ngOnInit(): void {
+    this.isLoading = true;
     this.contactService.getContactUsList(this.start, this.end).subscribe(
       (response: any) => {
         this.tableData = response.list;
@@ -70,6 +73,7 @@ export class DataTableComponent implements OnInit {
         var result = this.getPreferenceArray(this.preference);
         this.displayedColumns = result["backend_field"]
         this.labelColumns = result["display_field"]
+        this.isLoading = false;
       }
     )
     console.log(this);
@@ -80,7 +84,7 @@ export class DataTableComponent implements OnInit {
   getPreferenceArray(preference: Preference): {} {
     var arr = [];
     var displayField = [];
-    // if (preference) {
+
     if (preference.anything_else == true) {
       arr.push("anything_else");
       displayField.push("Anything Else");
@@ -114,11 +118,7 @@ export class DataTableComponent implements OnInit {
       displayField.push("Subject");
     }
     arr.push("sys_created_on");
-    // }
-    // else{
-    //   arr = ["anything_else", 'email', 'name', 'first_name', 'last_name', 'subject', 'message', 'phone_number', 'sys_created_on'];
-    //   displayField = ["Anything Else", "Email", "Name", "First Name", "Last Name", "Subject", "Message", "Phone Number", "Sys created on"];
-    // }
+
     displayField.push("Message Timing")
     return { "backend_field": arr, "display_field": displayField };
   }
@@ -151,4 +151,31 @@ export class DataTableComponent implements OnInit {
     });
   }
 
+
+  selectAll(){
+    console.log("select All");
+  }
+
+  deletion(id) {
+    console.log(id);
+    if (document.getElementById(id)["checked"]) {
+      this.deleteArray.push(id);
+
+    }
+    else {
+      this.deleteArray = this.removeElement(this.deleteArray,id);
+    }
+
+    console.log(this.deleteArray);
+  }
+
+  removeElement(arr, value) {
+    const array = arr;
+    // console.log(array);
+    const index = array.indexOf(value);
+    if (index > -1) {
+      array.splice(index, 1);
+    }
+    return array;
+  }
 }

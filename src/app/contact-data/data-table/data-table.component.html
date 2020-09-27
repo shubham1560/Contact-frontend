@@ -2,20 +2,32 @@
     <div class="row">
         <br><br>
         <div class="col-md-12">
-            <mat-icon (click)="openPreferenceModal()" style="cursor: pointer;">
-                settings
-            </mat-icon>
-            <span style="float: right; cursor: pointer;" mat-button [matMenuTriggerFor]="menu">
+            <button mat-icon-button (click)="openPreferenceModal()">
+                <mat-icon>
+                    settings
+                </mat-icon>
+            </button>
+
+            <button mat-icon-button (click)="ngOnInit()">
+                <mat-icon>
+                    refresh
+                </mat-icon>
+            </button>
+            <span *ngIf="isLoading">Loading...</span>
+            <button style="float: right; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu"
+                aria-label="Example icon button with a vertical three dot icon">
                 <mat-icon>more_vert</mat-icon>
-            </span>
+            </button>
             <mat-menu #menu="matMenu" xPosition="before">
                 <button mat-menu-item>Show up to</button>
                 <div>
-                    <button mat-menu-item (click)=chooseWindow(10) style="line-height: 20px; height: 30px;">10 items</button>
-                    <button mat-menu-item (click)=chooseWindow(50) style="line-height: 20px; height: 30px;">50 items</button>
-                    <button mat-menu-item (click)=chooseWindow(100) style="line-height: 20px; height: 30px;">100 items</button>
+                    <button mat-menu-item (click)=chooseWindow(10) style="line-height: 20px; height: 30px;">10
+                        items</button>
+                    <button mat-menu-item (click)=chooseWindow(50) style="line-height: 20px; height: 30px;">50
+                        items</button>
+                    <button mat-menu-item (click)=chooseWindow(100) style="line-height: 20px; height: 30px;">100
+                        items</button>
                 </div>
-                <!-- <button mat-menu-item>10</button> -->
             </mat-menu>
         </div>
         <br><br>
@@ -24,18 +36,36 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th>
+                                <button mat-icon-button class="checkbox" class="d-inline">
+                                    <input type="checkbox" class="check" (click)="selectAll()" >
+                                </button>
+                                Actions
+                            </th>
+
                             <th *ngFor="let column of labelColumns">{{column}}</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let message of tableData">
-                            <td *ngFor="let column of displayedColumns">{{message[column]}}</td>
+                        <tr *ngFor="let message of tableData" class="table-row">
                             <td>
-                                <mat-icon>label_important</mat-icon>
-                                <mat-icon>delete</mat-icon>
+                                <button mat-icon-button class="checkbox" class="d-inline">
+                                    <input type="checkbox" class="check" id={{message.id}} value={{message.id}} (click)="deletion(message.id)" >
+                                </button>
+                                <button mat-icon-button class="d-inline" (click)="markImportant()">
+                                    <mat-icon>
+                                        label_important
+                                    </mat-icon>
+                                </button>
+                                <button mat-icon-button class="d-inline" (click)="delete()">
+                                    <mat-icon>
+                                        delete
+                                    </mat-icon>
+                                </button>
+                                
                             </td>
 
+                            <td (click)="openForm()" *ngFor="let column of displayedColumns">{{message[column]}}</td>
                         </tr>
                     </tbody>
                 </table>
