@@ -13,6 +13,7 @@ export interface MessageTable {
   message: string;
   anything_else: string;
   phone_number: string;
+  sys_created_on: Date;
 }
 
 export interface Preference {
@@ -119,7 +120,7 @@ export class DataTableComponent implements OnInit {
     }
     arr.push("sys_created_on");
 
-    displayField.push("Message Timing")
+    displayField.push("Received on")
     return { "backend_field": arr, "display_field": displayField };
   }
 
@@ -177,8 +178,18 @@ export class DataTableComponent implements OnInit {
     console.log(this.deleteArray);
   }
 
-  markImportant(){
+  markImportant() {
     console.log("mark Important")
+  }
+
+
+  dataType(value) {
+    // return typeof(value);
+    if (value) {
+      if (value.includes("+05:30"))
+        return "date";
+    }
+    return typeof (value)
   }
 
   removeElement(arr, value) {

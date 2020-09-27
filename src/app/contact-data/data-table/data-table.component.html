@@ -71,7 +71,10 @@
                             </td>
 
                             <td (click)="openForm()" class="table-row-open" *ngFor="let column of displayedColumns">
-                                <span [ngStyle]="!message.read?{'font-weight': 'bold'} : {'font-weight': '100'}">{{message[column]}}</span>
+                                <!-- {{)}} <br>   -->
+                                <span [ngStyle]="!message.read?{'font-weight': 'bold'} : {'font-weight': '100'}" *ngIf="dataType(message[column])=='date'">{{message[column] | date:'short'}}</span>
+                                <span [ngStyle]="!message.read?{'font-weight': 'bold'} : {'font-weight': '100'}" *ngIf="dataType(message[column])!='date'">{{message[column]}}</span>
+                                
                             </td>
                         </tr>
                     </tbody>
