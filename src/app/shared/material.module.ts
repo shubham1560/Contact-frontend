@@ -9,7 +9,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [],
@@ -24,8 +24,10 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatIconModule,
     MatMenuModule,
     MatDialogModule,
+    MatRadioModule,
   ],
   exports:[
+    MatRadioModule,
     MatDialogModule,
     MatMenuModule,
     MatToolbarModule,

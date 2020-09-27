@@ -13,10 +13,75 @@
                     refresh
                 </mat-icon>
             </button>
-            <span *ngIf="isLoading">Loading...</span>
-            <button style="float: right; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon>more_vert</mat-icon>
+
+            <button mat-icon-button (click)="deleteSelected()">
+                <mat-icon>
+                    delete
+                </mat-icon>
             </button>
+
+
+
+            <button style="cursor: pointer;" mat-button [matMenuTriggerFor]="typemenu">
+                <span style="padding: auto; font-weight: bolder;"> {{messageType | uppercase}} MESSAGES </span>
+                <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+
+            <mat-menu #typemenu="matMenu" xPosition="before">
+                <button mat-menu-item><b>Show messages:</b> </button>
+                <button mat-menu-item (click)="changeMessageType('all')"
+                    [ngStyle]="messageType == 'all'?{'font-weight': 'bold'} : {'font-weight': '100'}"
+                    style="line-height: 20px; height: 30px;">All</button>
+                <button mat-menu-item (click)="changeMessageType('important')"
+                    [ngStyle]="messageType == 'important'?{'font-weight': 'bold'} : {'font-weight': '100'}"
+                    style="line-height: 20px; height: 30px;">Important</button>
+                <button mat-menu-item (click)="changeMessageType('starred')"
+                    [ngStyle]="messageType == 'starred'?{'font-weight': 'bold'} : {'font-weight': '100'}"
+                    style="line-height: 20px; height: 30px;">Starred</button>
+                <button mat-menu-item (click)="changeMessageType('read')"
+                    [ngStyle]="messageType == 'read'?{'font-weight': 'bold'} : {'font-weight': '100'}"
+                    style="line-height: 20px; height: 30px;">Read</button>
+                <button mat-menu-item (click)="changeMessageType('unread')"
+                    [ngStyle]="messageType == 'unread'?{'font-weight': 'bold'} : {'font-weight': '100'}"
+                    style="line-height: 20px; height: 30px;">Unread</button>
+            </mat-menu>
+
+            <button style="cursor: pointer;" mat-button [matMenuTriggerFor]="menu">
+                {{windowDefault}} items per page
+                <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+
+            <mat-menu #menu="matMenu" xPosition="before">
+                <button mat-menu-item> <b>Show up to: </b></button>
+                <div>
+                    <button mat-menu-item (click)=chooseWindow(10)
+                        [ngStyle]="windowDefault == 10?{'font-weight': 'bold'} : {'font-weight': '100'}"
+                        style="line-height: 20px; height: 30px;">10
+                        items</button>
+                    <button *ngIf="rowCount>10" mat-menu-item (click)=chooseWindow(25)
+                        [ngStyle]="windowDefault == 25?{'font-weight': 'bold'} : {'font-weight': '100'}"
+                        style="line-height: 20px; height: 30px;">25
+                        items</button>
+                    <button *ngIf="rowCount>25" mat-menu-item (click)=chooseWindow(50)
+                        [ngStyle]="windowDefault == 50?{'font-weight': 'bold'} : {'font-weight': '100'}"
+                        style="line-height: 20px; height: 30px;">50
+                        items</button>
+                    <button *ngIf="rowCount>50" mat-menu-item (click)=chooseWindow(75)
+                        [ngStyle]="windowDefault == 75?{'font-weight': 'bold'} : {'font-weight': '100'}"
+                        style="line-height: 20px; height: 30px;">75
+                        items</button>
+                    <button *ngIf="rowCount>75" mat-menu-item (click)=chooseWindow(100)
+                        [ngStyle]="windowDefault == 100?{'font-weight': 'bold'} : {'font-weight': '100'}"
+                        style="line-height: 20px; height: 30px;">100
+                        items</button>
+                </div>
+            </mat-menu>
+
+
+            <span *ngIf="isLoading" style="padding-left: 30px;">...</span>
+            <!-- <button style="float: right; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+            </button> -->
             <button [disabled]='start+windowDefault > rowCount' style="float: right;" mat-icon-button
                 (click)="nextPage()">
                 <mat-icon>
@@ -30,29 +95,10 @@
             </button>
 
 
+
             <span style="float: right; padding-top: 10px;">
                 Showing {{start}} - {{start+windowDefault}} of <b> {{rowCount}} </b>
             </span>
-            <mat-menu #menu="matMenu" xPosition="before">
-                <button mat-menu-item>Show up to</button>
-                <div>
-                    <button mat-menu-item (click)=chooseWindow(10) 
-                        style="line-height: 20px; height: 30px;">10
-                        items</button>
-                    <button *ngIf="rowCount>10" mat-menu-item (click)=chooseWindow(25) 
-                        style="line-height: 20px; height: 30px;">25
-                        items</button>
-                    <button *ngIf="rowCount>25" mat-menu-item (click)=chooseWindow(50) 
-                        style="line-height: 20px; height: 30px;">50
-                        items</button>
-                    <button *ngIf="rowCount>50" mat-menu-item (click)=chooseWindow(75)
-                        style="line-height: 20px; height: 30px;">75
-                        items</button>
-                    <button *ngIf="rowCount>75" mat-menu-item (click)=chooseWindow(100)
-                        style="line-height: 20px; height: 30px;">100
-                        items</button>
-                </div>
-            </mat-menu>
         </div>
         <br><br>
         <div class="col-md-12">

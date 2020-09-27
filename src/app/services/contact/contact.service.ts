@@ -22,8 +22,8 @@ export class ContactService {
   url;
   body;
 
-  getContactUsList(start){
-    this.url = `${this.base_url_contact}get/${start}/`;
+  getContactUsList(start, message_type){
+    this.url = `${this.base_url_contact}get/${start}/${message_type}/`;
     return this.httpService.get(this.url, {headers: this.headers});
   }
 

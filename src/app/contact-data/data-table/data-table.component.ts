@@ -52,9 +52,10 @@ export class DataTableComponent implements OnInit {
   deleteArray = [];
   isLoading = true;
   rowCount;
+  messageType = "all";  // can be type important, read, unread, starred
   ngOnInit(): void {
     this.isLoading = true;
-    this.contactService.getContactUsList(this.start).subscribe(
+    this.contactService.getContactUsList(this.start, this.messageType).subscribe(
       (response: any) => {
         this.tableData = response.list;
         this.preference = response.preference[0];
@@ -226,6 +227,17 @@ export class DataTableComponent implements OnInit {
       }
     )
     // console.log("mark Important")
+  }
+
+  deleteSelected() {
+    console.log(this.deleteArray);
+  }
+
+  changeMessageType(type) {
+    if (this.messageType != type) {
+      this.messageType = type;
+      this.ngOnInit();
+    }
   }
 
   dataType(value) {
