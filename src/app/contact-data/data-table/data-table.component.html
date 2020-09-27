@@ -13,12 +13,12 @@
                     refresh
                 </mat-icon>
             </button>
-            <!-- <b>Total Records: </b>{{rowCount}} -->
             <span *ngIf="isLoading">Loading...</span>
             <button style="float: right; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
             </button>
-            <button [disabled]='start+windowDefault > rowCount' style="float: right;" mat-icon-button (click)="nextPage()">
+            <button [disabled]='start+windowDefault > rowCount' style="float: right;" mat-icon-button
+                (click)="nextPage()">
                 <mat-icon>
                     navigate_next
                 </mat-icon>
@@ -29,23 +29,27 @@
                 </mat-icon>
             </button>
 
-            
+
             <span style="float: right; padding-top: 10px;">
                 Showing {{start}} - {{start+windowDefault}} of <b> {{rowCount}} </b>
             </span>
-            
-
-
-
-
             <mat-menu #menu="matMenu" xPosition="before">
                 <button mat-menu-item>Show up to</button>
                 <div>
-                    <button mat-menu-item (click)=chooseWindow(10) style="line-height: 20px; height: 30px;">10
+                    <button mat-menu-item (click)=chooseWindow(10) 
+                        style="line-height: 20px; height: 30px;">10
                         items</button>
-                    <button mat-menu-item (click)=chooseWindow(50) style="line-height: 20px; height: 30px;">50
+                    <button *ngIf="rowCount>10" mat-menu-item (click)=chooseWindow(25) 
+                        style="line-height: 20px; height: 30px;">25
                         items</button>
-                    <button mat-menu-item (click)=chooseWindow(100) style="line-height: 20px; height: 30px;">100
+                    <button *ngIf="rowCount>25" mat-menu-item (click)=chooseWindow(50) 
+                        style="line-height: 20px; height: 30px;">50
+                        items</button>
+                    <button *ngIf="rowCount>50" mat-menu-item (click)=chooseWindow(75)
+                        style="line-height: 20px; height: 30px;">75
+                        items</button>
+                    <button *ngIf="rowCount>75" mat-menu-item (click)=chooseWindow(100)
+                        style="line-height: 20px; height: 30px;">100
                         items</button>
                 </div>
             </mat-menu>
@@ -69,7 +73,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let message of tableData" class="table-row">
-                            <td>
+                            <td style="padding: 0px; line-height: 1; vertical-align: auto;">
                                 <button mat-icon-button class="checkbox" class="d-inline">
                                     <input type="checkbox" class="check" id={{message.id}} value={{message.id}}
                                         (click)="deletion(message.id)">

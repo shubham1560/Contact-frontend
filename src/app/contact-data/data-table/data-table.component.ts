@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ContactService } from 'src/app/services/contact/contact.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PreferencesComponent } from '../preferences/preferences.component';
-import { ConsoleComponent } from 'src/app/dev-console/console.component';
-
 
 export interface MessageTable {
   first_name: string;
@@ -91,12 +89,12 @@ export class DataTableComponent implements OnInit {
     var arr = [];
     var displayField = [];
 
-    
+
     if (preference.first_name == true) {
       arr.push("first_name");
       displayField.push("First Name");
     }
-    
+
     if (preference.last_name == true) {
       arr.push("last_name");
       displayField.push("Last Name");
@@ -139,16 +137,18 @@ export class DataTableComponent implements OnInit {
   }
 
   chooseWindow(value) {
-    this.contactService.changeUserDomainPreferenceWindow("window", value).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.windowDefault = value;
-        // this.start = this.start + this.windowDefault;
-        this.ngOnInit();
-      }, error => {
-        console.log(error);
-      }
-    )
+    if (value != this.windowDefault) {
+      this.contactService.changeUserDomainPreferenceWindow("window", value).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.windowDefault = value;
+          // this.start = this.start + this.windowDefault;
+          this.ngOnInit();
+        }, error => {
+          console.log(error);
+        }
+      )
+    }
   }
 
   openPreferenceModal() {
@@ -201,12 +201,12 @@ export class DataTableComponent implements OnInit {
     console.log(this.deleteArray);
   }
 
-  nextPage(){
+  nextPage() {
     this.start = this.start + this.windowDefault;
     this.ngOnInit();
   }
 
-  previousPage(){
+  previousPage() {
     this.start = this.start - this.windowDefault;
     this.ngOnInit();
   }
