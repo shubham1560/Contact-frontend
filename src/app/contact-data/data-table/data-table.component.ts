@@ -58,22 +58,20 @@ export class DataTableComponent implements OnInit {
     this.contactService.getContactUsList(this.start, this.messageType).subscribe(
       (response: any) => {
         this.tableData = response.list;
-        this.preference = response.preference[0];
-        this.windowDefault = response.preference[0]["window"];
+        this.preference = response.preference[0] || {
+          anything_else: true,
+          email: true,
+          first_name: true,
+          id: 5,
+          last_name: true,
+          message: true,
+          name: true,
+          phone_number: true,
+          subject: true,
+          window: 50
+        };
+        this.windowDefault = this.preference["window"];
         this.rowCount = response.row_count;
-        if (!this.preference) {
-          this.preference = {
-            first_name: true,
-            last_name: true,
-            anything_else: true,
-            email: true,
-            message: true,
-            name: true,
-            phone_number: true,
-            subject: true
-          }
-          this.windowDefault = 50;
-        }
         this.domain = this.preference
         var result = this.getPreferenceArray(this.preference);
         this.displayedColumns = result["backend_field"]
@@ -82,8 +80,6 @@ export class DataTableComponent implements OnInit {
       }
     )
     console.log(this);
-
-    // console.log(this);
   }
 
   getPreferenceArray(preference: Preference): {} {
@@ -144,7 +140,6 @@ export class DataTableComponent implements OnInit {
           console.log(response);
           this.windowDefault = value;
           this.start = 0;
-          // this.start = this.start + this.windowDefault;
           this.ngOnInit();
         }, error => {
           console.log(error);
@@ -161,9 +156,6 @@ export class DataTableComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // console.log(result);
-      // this.getPreferenceArray(result);
       if (result) {
         this.preference = result;
         var result: any = this.getPreferenceArray(result);
@@ -175,8 +167,6 @@ export class DataTableComponent implements OnInit {
 
 
   selectAll(messages) {
-    console.log(messages);
-    console.log("select All");
     this.deleteArray = [];
     if (document.getElementById("mastercheck")["checked"] == true) {
       messages.forEach(element => {
@@ -186,14 +176,12 @@ export class DataTableComponent implements OnInit {
     } else {
       messages.forEach(element => {
         document.getElementById(element.id)["checked"] = false;
-        // this.deleteArray
       });
     }
     // console.log(this.deleteArray);
   }
 
   deletion(id) {
-    console.log(id);
     if (document.getElementById(id)["checked"]) {
       this.deleteArray.push(id);
     }
@@ -214,7 +202,6 @@ export class DataTableComponent implements OnInit {
   }
 
   mark(field, value, id) {
-    // console.log(value, id);
     this.tableData.forEach(element => {
       if (element["id"] == id) {
         element[field] = value;
@@ -227,22 +214,23 @@ export class DataTableComponent implements OnInit {
         console.log(error);
       }
     )
-    // console.log("mark Important")
   }
 
   deleteSelected() {
     console.log(this.deleteArray);
-    this.contactService.deleteMessages(this.deleteArray).subscribe(
-      (response:any)=>{
-        console.log(response);
-        this.deleteArray = [];
-        this.ngOnInit();
-      }, error =>{
-        console.log(error);
-        this.ngOnInit();
-        this.deleteArray=[];
-      }
-    )
+    if (this.deleteArray.length > 0) {
+      this.contactService.deleteMessages(this.deleteArray).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.deleteArray = [];
+          this.ngOnInit();
+        }, error => {
+          console.log(error);
+          this.ngOnInit();
+          this.deleteArray = [];
+        }
+      )
+    }
   }
 
   changeMessageType(type) {
@@ -254,7 +242,6 @@ export class DataTableComponent implements OnInit {
   }
 
   dataType(value) {
-    // return typeof(value);
     if (value) {
       if (value.includes("+05:30"))
         return "date";
@@ -264,7 +251,6 @@ export class DataTableComponent implements OnInit {
 
   removeElement(arr, value) {
     const array = arr;
-    // console.log(array);
     const index = array.indexOf(value);
     if (index > -1) {
       array.splice(index, 1);

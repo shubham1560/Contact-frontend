@@ -1,4 +1,7 @@
 <mat-progress-bar mode="query" *ngIf="isLoading"></mat-progress-bar>
+<!-- <mat-progress-bar mode="query" ></mat-progress-bar> -->
+<mat-progress-bar mode="determinate" *ngIf="!isLoading" value="100" ></mat-progress-bar>
+
 <div class="container-fluid">
     <div class="row">
         <br><br>
@@ -14,8 +17,9 @@
                     refresh
                 </mat-icon>
             </button>
-
-            <button mat-icon-button (click)="deleteSelected()">
+            <!-- {{deleteArray}} -->
+            <!-- well -->
+            <button mat-icon-button [disabled]="deleteArray.length == 0" (click)="deleteSelected()">
                 <mat-icon>
                     delete
                 </mat-icon>
@@ -83,7 +87,7 @@
             <!-- <button style="float: right; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
             </button> -->
-            <button [disabled]='start+windowDefault > rowCount' style="float: right;" mat-icon-button
+            <button [disabled]='start+windowDefault >= rowCount' style="float: right;" mat-icon-button
                 (click)="nextPage()">
                 <mat-icon>
                     navigate_next
@@ -158,7 +162,7 @@
                             <td (click)="mark('read', true, message.id)" class="table-row-open"
                                 *ngFor="let column of displayedColumns">
                                 <!-- {{)}} <br>   -->
-                                <span [ngStyle]="!message.read?{'font-weight': 'bold'} : {'font-weight': '100'}"
+                                <span [ngStyle]="!message.read?{'font-weight': 'bold', 'color': 'green'} : {'font-weight': '100'}"
                                     *ngIf="dataType(message[column])=='date'">{{message[column] | date:'short'}}</span>
                                 <span [ngStyle]="!message.read?{'font-weight': 'bold'} : {'font-weight': '100'}"
                                     *ngIf="dataType(message[column])!='date'">{{message[column]}}</span>

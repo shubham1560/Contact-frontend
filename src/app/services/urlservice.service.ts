@@ -12,7 +12,8 @@ export class UrlserviceService {
 
   ) { }
 
-  base_url = "http://127.0.0.1:8000/";
+  // base_url = "http://127.0.0.1:8000/";
+  base_url = "https://contact-api-backend.herokuapp.com/"
 
   getUrl() {
     return this.base_url;

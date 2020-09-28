@@ -31,6 +31,7 @@ export class SignInComponent implements OnInit {
     this.authService.loginRoot(this.loginForm.value['email'], this.loginForm.value['password']).subscribe(
       (response:any)=>{
         this.cookieService.set('token', response.token);
+        // this.cookieService.zzz
         localStorage.setItem('token', response.token);
         window.location.href="dashboard";
         // console.log(response);
