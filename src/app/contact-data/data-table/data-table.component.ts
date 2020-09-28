@@ -143,6 +143,7 @@ export class DataTableComponent implements OnInit {
         (response: any) => {
           console.log(response);
           this.windowDefault = value;
+          this.start = 0;
           // this.start = this.start + this.windowDefault;
           this.ngOnInit();
         }, error => {
@@ -231,10 +232,22 @@ export class DataTableComponent implements OnInit {
 
   deleteSelected() {
     console.log(this.deleteArray);
+    this.contactService.deleteMessages(this.deleteArray).subscribe(
+      (response:any)=>{
+        console.log(response);
+        this.deleteArray = [];
+        this.ngOnInit();
+      }, error =>{
+        console.log(error);
+        this.ngOnInit();
+        this.deleteArray=[];
+      }
+    )
   }
 
   changeMessageType(type) {
     if (this.messageType != type) {
+      this.start = 0;
       this.messageType = type;
       this.ngOnInit();
     }

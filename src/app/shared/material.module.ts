@@ -10,6 +10,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [],
@@ -25,8 +26,10 @@ import {MatRadioModule} from '@angular/material/radio';
     MatMenuModule,
     MatDialogModule,
     MatRadioModule,
+    MatProgressBarModule
   ],
   exports:[
+    MatProgressBarModule,
     MatRadioModule,
     MatDialogModule,
     MatMenuModule,
