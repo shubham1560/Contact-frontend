@@ -148,15 +148,21 @@
                                         star_border
                                     </mat-icon>
                                 </button>
+                                <button *ngIf="!message.read" mat-icon-button class="d-inline">
+                                <mat-icon style="color: #5B6869;">lens</mat-icon>
+                                    
+                                </button>
                             </td>
                             <td (click)="mark('read', true, message.id)" class="table-row-open"
                                 *ngFor="let column of displayedColumns">
                                 <!-- {{)}} <br>   -->
                                 <span
-                                    [ngStyle]="!message.read?{'font-weight': 'bold', 'color': 'green'} : {'font-weight': '100'}"
-                                    *ngIf="dataType(message[column])=='date'">{{message[column] | date:'short'}}</span>
-                                <span [ngStyle]="!message.read?{'font-weight': 'bold'} : {'font-weight': '100'}"
-                                    *ngIf="dataType(message[column])!='date'">{{message[column]}}</span>
+                                    [ngStyle]="!message.read?{'font-weight': 'bold', 'color': '#5B6869'} : {'font-weight': '100' }"
+                                    *ngIf="dataType(message[column])=='date'" style="text-overflow: ellipsis;">{{message[column] | date:'short'}}</span>
+                                <span [ngStyle]="!message.read?{'font-weight': 'bold', 'color': '#5B6869'} : {'font-weight': '100'}"
+                                    *ngIf="dataType(message[column])!='date'" style="text-overflow: ellipsis;">
+                                    {{ message[column].length>40 ? (message[column] | slice:0:40)+ '...': (message[column])}}
+                                </span>
                             </td>
                         </tr>
                     </tbody>

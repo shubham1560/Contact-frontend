@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TablePreferenceComponent } from './table-preference.component';
+import { ApiDetailComponent } from './api-detail.component';
 
-describe('TablePreferenceComponent', () => {
-  let component: TablePreferenceComponent;
-  let fixture: ComponentFixture<TablePreferenceComponent>;
+describe('ApiDetailComponent', () => {
+  let component: ApiDetailComponent;
+  let fixture: ComponentFixture<ApiDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TablePreferenceComponent ]
+      declarations: [ ApiDetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TablePreferenceComponent);
+    fixture = TestBed.createComponent(ApiDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormPreferenceComponent } from './form-preference.component';
+import { FormIntegrationComponent } from './form-integration.component';
 
-describe('FormPreferenceComponent', () => {
-  let component: FormPreferenceComponent;
-  let fixture: ComponentFixture<FormPreferenceComponent>;
+describe('FormIntegrationComponent', () => {
+  let component: FormIntegrationComponent;
+  let fixture: ComponentFixture<FormIntegrationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormPreferenceComponent ]
+      declarations: [ FormIntegrationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormPreferenceComponent);
+    fixture = TestBed.createComponent(FormIntegrationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { DevConsoleRoutingModule } from './dev-console-routing.module';
 import { ConsoleComponent } from './console.component';
-import { TablePreferenceComponent } from './table-preference/table-preference.component';
-import { FormPreferenceComponent } from './form-preference/form-preference.component';
+import { ApiDetailComponent } from './api-detail/api-detail.component';
+import { FormIntegrationComponent } from './form-integration/form-integration.component';
 
 
 @NgModule({
-  declarations: [ConsoleComponent, TablePreferenceComponent, FormPreferenceComponent],
+  declarations: [ConsoleComponent, ApiDetailComponent, FormIntegrationComponent],
   imports: [
     CommonModule,
     DevConsoleRoutingModule
