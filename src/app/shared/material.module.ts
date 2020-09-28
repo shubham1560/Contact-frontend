@@ -11,6 +11,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatTooltipModule} from '@angular/material/tooltip'
 
 @NgModule({
   declarations: [],
@@ -26,9 +27,11 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatMenuModule,
     MatDialogModule,
     MatRadioModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTooltipModule,
   ],
   exports:[
+    MatTooltipModule,
     MatProgressBarModule,
     MatRadioModule,
     MatDialogModule,

@@ -1,32 +1,30 @@
 <mat-progress-bar mode="query" *ngIf="isLoading"></mat-progress-bar>
 <!-- <mat-progress-bar mode="query" ></mat-progress-bar> -->
-<mat-progress-bar mode="determinate" *ngIf="!isLoading" value="100" ></mat-progress-bar>
+<mat-progress-bar mode="determinate" *ngIf="!isLoading" value="100"></mat-progress-bar>
 
 <div class="container-fluid">
     <div class="row">
         <br><br>
         <div class="col-md-12">
-            <button mat-icon-button (click)="openPreferenceModal()">
+            <button mat-icon-button matTooltip="User Preferences" (click)="openPreferenceModal()">
                 <mat-icon>
                     settings
                 </mat-icon>
             </button>
 
-            <button mat-icon-button (click)="ngOnInit()">
+            <button mat-icon-button matTooltip="Reload" matTooltipPosition="above" (click)="ngOnInit()">
                 <mat-icon>
                     refresh
                 </mat-icon>
             </button>
             <!-- {{deleteArray}} -->
             <!-- well -->
-            <button mat-icon-button [disabled]="deleteArray.length == 0" (click)="deleteSelected()">
+            <button mat-icon-button matTooltip="Delete {{deleteArray.length}} message(s)" matTooltipPosition="above"
+                matTooltipClass="tooltip-red" [disabled]="deleteArray.length == 0" (click)="deleteSelected()">
                 <mat-icon>
                     delete
                 </mat-icon>
             </button>
-
-
-
             <button style="cursor: pointer;" mat-button [matMenuTriggerFor]="typemenu">
                 <span style="padding: auto; font-weight: bolder;"> {{messageType | uppercase}} MESSAGES </span>
                 <mat-icon>keyboard_arrow_down</mat-icon>
@@ -34,19 +32,24 @@
 
             <mat-menu #typemenu="matMenu" xPosition="before">
                 <button mat-menu-item><b>Show messages:</b> </button>
-                <button mat-menu-item (click)="changeMessageType('all')"
+                <button mat-menu-item (click)="changeMessageType('all')" matTooltip="Show all messages"
+                    matTooltipPosition="right"
                     [ngStyle]="messageType == 'all'?{'font-weight': 'bold'} : {'font-weight': '100'}"
                     style="line-height: 20px; height: 30px;">All</button>
-                <button mat-menu-item (click)="changeMessageType('important')"
+                <button mat-menu-item (click)="changeMessageType('important')" matTooltip="Show important messages"
+                    matTooltipPosition="right"
                     [ngStyle]="messageType == 'important'?{'font-weight': 'bold'} : {'font-weight': '100'}"
                     style="line-height: 20px; height: 30px;">Important</button>
-                <button mat-menu-item (click)="changeMessageType('starred')"
+                <button mat-menu-item (click)="changeMessageType('starred')" matTooltip="Show starred messages"
+                    matTooltipPosition="right"
                     [ngStyle]="messageType == 'starred'?{'font-weight': 'bold'} : {'font-weight': '100'}"
                     style="line-height: 20px; height: 30px;">Starred</button>
-                <button mat-menu-item (click)="changeMessageType('read')"
+                <button mat-menu-item (click)="changeMessageType('read')" matTooltip="Show read messages"
+                    matTooltipPosition="right"
                     [ngStyle]="messageType == 'read'?{'font-weight': 'bold'} : {'font-weight': '100'}"
                     style="line-height: 20px; height: 30px;">Read</button>
-                <button mat-menu-item (click)="changeMessageType('unread')"
+                <button mat-menu-item (click)="changeMessageType('unread')" matTooltip="Show unread messages"
+                    matTooltipPosition="right"
                     [ngStyle]="messageType == 'unread'?{'font-weight': 'bold'} : {'font-weight': '100'}"
                     style="line-height: 20px; height: 30px;">Unread</button>
             </mat-menu>
@@ -81,12 +84,7 @@
                         items</button>
                 </div>
             </mat-menu>
-
-
             <span *ngIf="isLoading" style="padding-left: 30px;">...</span>
-            <!-- <button style="float: right; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon>more_vert</mat-icon>
-            </button> -->
             <button [disabled]='start+windowDefault >= rowCount' style="float: right;" mat-icon-button
                 (click)="nextPage()">
                 <mat-icon>
@@ -98,9 +96,6 @@
                     navigate_before
                 </mat-icon>
             </button>
-
-
-
             <span style="float: right; padding-top: 10px;">
                 Showing {{start}} - {{start+windowDefault}} of <b> {{rowCount}} </b>
             </span>
@@ -141,8 +136,6 @@
                                         label_important
                                     </mat-icon>
                                 </button>
-
-
                                 <button mat-icon-button class="d-inline" *ngIf="message.starred"
                                     (click)="mark('starred', false, message.id)">
                                     <mat-icon style="color: gold">
@@ -155,18 +148,15 @@
                                         star_border
                                     </mat-icon>
                                 </button>
-
-
                             </td>
-
                             <td (click)="mark('read', true, message.id)" class="table-row-open"
                                 *ngFor="let column of displayedColumns">
                                 <!-- {{)}} <br>   -->
-                                <span [ngStyle]="!message.read?{'font-weight': 'bold', 'color': 'green'} : {'font-weight': '100'}"
+                                <span
+                                    [ngStyle]="!message.read?{'font-weight': 'bold', 'color': 'green'} : {'font-weight': '100'}"
                                     *ngIf="dataType(message[column])=='date'">{{message[column] | date:'short'}}</span>
                                 <span [ngStyle]="!message.read?{'font-weight': 'bold'} : {'font-weight': '100'}"
                                     *ngIf="dataType(message[column])!='date'">{{message[column]}}</span>
-
                             </td>
                         </tr>
                     </tbody>
