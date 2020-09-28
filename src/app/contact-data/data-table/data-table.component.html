@@ -160,8 +160,12 @@
                                     [ngStyle]="!message.read?{'font-weight': 'bold', 'color': '#5B6869'} : {'font-weight': '100' }"
                                     *ngIf="dataType(message[column])=='date'" style="text-overflow: ellipsis;">{{message[column] | date:'short'}}</span>
                                 <span [ngStyle]="!message.read?{'font-weight': 'bold', 'color': '#5B6869'} : {'font-weight': '100'}"
-                                    *ngIf="dataType(message[column])!='date'" style="text-overflow: ellipsis;">
+                                    *ngIf="dataType(message[column])!='date' && dataType(message[column])=='string'" style="text-overflow: ellipsis;">
                                     {{ message[column].length>40 ? (message[column] | slice:0:40)+ '...': (message[column])}}
+                                </span>
+                                <span [ngStyle]="!message.read?{'font-weight': 'bold', 'color': '#5B6869'} : {'font-weight': '100'}"
+                                    *ngIf="dataType(message[column])!='date' && dataType(message[column])!='string'" style="text-overflow: ellipsis;">
+                                    {{ message[column]}}
                                 </span>
                             </td>
                         </tr>
