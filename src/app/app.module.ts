@@ -12,6 +12,7 @@ import { MaterialModule } from './shared/material.module'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthserviceService } from './services/authservice/authservice.service'
 import { ContactService } from './services/contact/contact.service'
+import { DomainService } from './services/domain/domain.service'
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -30,7 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     HttpClientModule,
   ],
-  providers: [AuthserviceService, ContactService],
+  providers: [AuthserviceService, ContactService, DomainService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
