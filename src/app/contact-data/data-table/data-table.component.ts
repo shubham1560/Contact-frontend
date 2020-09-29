@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ContactService } from 'src/app/services/contact/contact.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PreferencesComponent } from '../preferences/preferences.component';
+import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.component'
 
 export interface MessageTable {
   first_name: string;
@@ -137,12 +138,12 @@ export class DataTableComponent implements OnInit {
     if (value != this.windowDefault) {
       this.contactService.changeUserDomainPreferenceWindow("window", value).subscribe(
         (response: any) => {
-          console.log(response);
+          // console.log(response);
           this.windowDefault = value;
           this.start = 0;
           this.ngOnInit();
         }, error => {
-          console.log(error);
+          // console.log(error);
         }
       )
     }
@@ -188,7 +189,7 @@ export class DataTableComponent implements OnInit {
     else {
       this.deleteArray = this.removeElement(this.deleteArray, id);
     }
-    console.log(this.deleteArray);
+    // console.log(this.deleteArray);
   }
 
   nextPage() {
@@ -209,28 +210,49 @@ export class DataTableComponent implements OnInit {
     });
     this.contactService.markMessage(field, value, id).subscribe(
       (result: any) => {
-        console.log(result);
+        // console.log(result);
       }, error => {
-        console.log(error);
+        // console.log(error);
       }
     )
   }
 
   deleteSelected() {
-    console.log(this.deleteArray);
-    if (this.deleteArray.length > 0) {
-      this.contactService.deleteMessages(this.deleteArray).subscribe(
-        (response: any) => {
-          console.log(response);
-          this.deleteArray = [];
-          this.ngOnInit();
-        }, error => {
-          console.log(error);
-          this.ngOnInit();
-          this.deleteArray = [];
+    // console.log(this.deleteArray);
+
+    const dialogRef = this.dialog.open(DeleteConfirmComponent, {
+      width: '250px',
+      data: { length: this.deleteArray.length}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log("called");
+      console.log(result);
+      console.log(this.data);
+      if(this.data['delete'] == true){
+        if (this.deleteArray.length > 0) {
+          this.contactService.deleteMessages(this.deleteArray).subscribe(
+            (response: any) => {
+              // console.log(response);
+              this.deleteArray = [];
+              this.ngOnInit();
+            }, error => {
+              // console.log(error);
+              this.ngOnInit();
+              this.deleteArray = [];
+            }
+          )
         }
-      )
-    }
+      }
+      // if (result) {
+        // this.preference = result;
+        // var result: any = this.getPreferenceArray(result);
+        // this.displayedColumns = result["backend_field"]
+        // this.labelColumns = result["display_field"]
+      // }
+    });
+
+    
   }
 
   changeMessageType(type) {

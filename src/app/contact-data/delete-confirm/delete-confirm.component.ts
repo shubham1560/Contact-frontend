@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-delete-confirm',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeleteConfirmComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public dialogRef: MatDialogRef<DeleteConfirmComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ) { }
 
   ngOnInit(): void {
+    console.log(this.data);
   }
 
+  // this.data.delete = false;
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  deleteSelected(){
+    this.data.delete = true;
+    console.log(this.data);
+    this.dialogRef.close();
+  }
 }

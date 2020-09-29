@@ -1,1 +1,10 @@
-<p>delete-confirm works!</p>
+<b> <p>Delete {{data.length}} message(s)?</p> </b>
+<br><br><br>
+<p style="text-align: right;">
+    <button mat-button (click)="onNoClick()" color="primary">Cancel</button>
+    <!-- <button mat-raised-button color="accent">Accent</button> -->
+    <button mat-raised-button color="warn" [mat-dialog-close]="true" (click)="deleteSelected()" cdkFocusInitial>Delete</button>
+</p>
+<!-- <pre>
+{{data | json}}
+</pre> -->
