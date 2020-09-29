@@ -1,7 +1,17 @@
 <mat-toolbar>
     <span>BridgeMount</span>
     <span class="fillspace"></span>
+    <button mat-button color="primary" routerLink="dashboard">Dashboard</button>
+    <button mat-button color="primary" routerLink="console">Console</button>
 
-    <a routerLink="auth">Sign In</a>
+    <button mat-button color="primary" routerLink="auth">Sign in</button>
+    
+    <button mat-button color="primary" (click)="logout()">Sign out</button>
+    
+    <!-- <a routerLink="dashboard">Dashboard</a>
+
+    <a routerLink="console">Console</a>
+
+    <a routerLink="auth">Sign In</a> -->
 
 </mat-toolbar>
