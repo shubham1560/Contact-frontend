@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, NoPreloading } from '@angular/router';
 import { AuthGuard } from './auth/guard/auth.guard'
+import { UnauthGuard } from './auth/guard/unauth.guard'
+
 const routes: Routes = [
   {
     path: "auth",
@@ -15,11 +17,13 @@ const routes: Routes = [
   },
   {
     path: "console",
+    canActivate: [UnauthGuard],
     loadChildren: ()=>
       import('././dev-console/dev-console.module').then(m => m.DevConsoleModule)
   },
   {
     path: "dashboard",
+    canActivate: [UnauthGuard],
     loadChildren: ()=>
       import('././contact-data/contact-data.module').then(m => m.ContactDataModule)
   },
