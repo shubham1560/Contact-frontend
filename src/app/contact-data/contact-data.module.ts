@@ -7,10 +7,11 @@ import { MaterialModule } from '../shared/material.module';
 import { PreferencesComponent } from './preferences/preferences.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
+import { MessageDetailComponent } from './message-detail/message-detail.component';
 
 
 @NgModule({
-  declarations: [DataTableComponent, PreferencesComponent, DeleteConfirmComponent],
+  declarations: [DataTableComponent, PreferencesComponent, DeleteConfirmComponent, MessageDetailComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ContactService } from 'src/app/services/contact/contact.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PreferencesComponent } from '../preferences/preferences.component';
-import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.component'
+import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.component';
+import { MessageDetailComponent } from '../message-detail/message-detail.component'
 
 export interface MessageTable {
   first_name: string;
@@ -215,6 +216,12 @@ export class DataTableComponent implements OnInit {
         // console.log(error);
       }
     )
+    if(field=="read"){
+      const dialogRef = this.dialog.open(MessageDetailComponent, {
+        // width: '250px',
+        data: { message: this.tableData[id]}
+      });
+    }
   }
 
   deleteSelected() {
