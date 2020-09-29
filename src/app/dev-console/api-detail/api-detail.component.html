@@ -1,8 +1,16 @@
+<pre>
+    {{ domainDetails | json}}
+</pre>
+
 <div class="row">
-    <div class="col-md-12">
-        <p>api-detail works!</p>
+    <div class="col-md-6">
+        <b> Customer Details: </b><br>
+        <b> Customer Company: </b>{{domainDetails.name}} <br>
+        <b> Active: </b>{{domainDetails.active}} <br>
+        <b> Created On: </b>{{domainDetails.sys_created_on}} <br>
 
-        
-
+    </div>
+    <div class="col-md-6">
+        Api-key: {{domainDetails.api_key}}
     </div>
 </div>
