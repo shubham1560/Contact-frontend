@@ -1,21 +1,16 @@
 <!-- <p>message-detail works!</p> -->
 
 
-<h2 mat-dialog-title>Message Details</h2> 
+<div mat-dialog-title>
+    Message Details
+    <button mat-icon-button style="float: right;" (click)="changePreference()"> 
+        <mat-icon>settings</mat-icon>
+    </button>
+</div> 
 
 
 
 <mat-dialog-content class="mat-typography">
-    <!-- <pre> -->
-        <!-- {{data | json}} -->
-        <!-- {{preference | json}} -->
-        <!-- </pre> -->
-
-        <!-- {{data.message.id}} -->
-        <!-- <div *ngFor="let message of data.message"> -->
-            <!-- {{message}} -->
-        <!-- </div> -->
-
         <div *ngFor="let property of preferenceArray" style="padding-bottom: 20px">
             <b>{{property.toUpperCase().replace('_', ' ')}} </b> <br> {{data.message[property]}}
         </div>
@@ -24,6 +19,6 @@
 
 
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+    <!-- <button mat-button mat-dialog-close>Cancel</button> -->
+    <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Save</button>
 </mat-dialog-actions>

@@ -221,9 +221,16 @@ export class DataTableComponent implements OnInit {
     )
     if(field=="read"){
       const dialogRef = this.dialog.open(MessageDetailComponent, {
-        // width: '250px',
+        width: '100%',
         data: { message: this.selectedMessage}
       });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        console.log(result);
+        // this.animal = result;
+      });
+
     }
   }
 
@@ -236,30 +243,19 @@ export class DataTableComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log("called");
-      // console.log();
-      // console.log(this.data);
       if(result){
         if (this.deleteArray.length > 0) {
           this.contactService.deleteMessages(this.deleteArray).subscribe(
             (response: any) => {
-              // console.log(response);
               this.deleteArray = [];
               this.ngOnInit();
             }, error => {
-              // console.log(error);
               this.ngOnInit();
               this.deleteArray = [];
             }
           )
         }
       }
-      // if (result) {
-        // this.preference = result;
-        // var result: any = this.getPreferenceArray(result);
-        // this.displayedColumns = result["backend_field"]
-        // this.labelColumns = result["display_field"]
-      // }
     });
 
     
