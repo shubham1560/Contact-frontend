@@ -2,3 +2,92 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #181818;}
+
+
+.uf-auth-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .uf-auth-form{
+        margin: auto;
+        width: 320px;
+        padding-right: 10px;
+        padding-left: 10px;
+
+
+        .uf-auth-logo-space{
+            padding: 12px 0px 14px;
+            text-align: center;
+        }
+        .uf-auth-form-header{
+            padding:  15px;
+            text-align: center;
+            color: #425051;
+        }
+        .uf-auth-form-body{
+            // border: 1px solid rgba(0,0,0,.26);
+            // border-radius: 5px;
+            padding: 15px;
+            background-color: white;
+
+
+            .uf-auth-info-block{
+                text-align: center;
+                .uf-auth-icon{
+                    margin: 0px 8px;
+                    font-size: 80px;
+                    height: 80px;
+                    width: 80px;
+                    background-color: white;
+
+                }
+            }
+            .uf-googlelogin{
+                width: 100%;
+                text-align: center;
+                padding-top: 5px;
+                margin-bottom: 10px;
+                border: 1px solid #425051 !important;
+                // border-color: rgb(170, 170, 170);
+                cursor: pointer;
+                color: #425051;
+            }
+            .uf-auth-or{
+                width: 100%;
+                text-align: center;
+            }
+            .uf-auth-input-block{
+                display: block;
+                width: 100%;
+                color: #425051;
+
+            }
+            .uf-auth-buttons-div{
+                padding: 5px; 
+                height:30px;
+                .uf-auth-left-button{
+                    display: block;
+                    float: left;
+                    color: #3a899d;
+                    
+                }
+                .uf-auth-right-button{
+                    display: block;
+                    float: right;
+                }
+            }
+        }
+        .uf-auth-form-footer{
+            // border: 1px solid rgba(0,0,0,.26);
+            font-size: 12px;
+            // border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            background-color: white;
+            color: #425051;
+        }
+    }
+
+}

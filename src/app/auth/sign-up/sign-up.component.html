@@ -1,64 +1,89 @@
-<div>
-    <form (ngSubmit)="register()" [formGroup]='registrationForm' class="uf-auth-form-body">
-        <mat-form-field appearance="outline" class="uf-auth-input-block">
-            <mat-label>Full Name</mat-label>
-            <input matInput type="text" id="name" formControlName="full_name" placeholder="Enter your name">
-            <mat-error>Please enter name</mat-error>
-            <mat-icon matSuffix style="margin: 0px 8px;">account_box</mat-icon>
-        </mat-form-field>
-        <br>
-        <mat-form-field appearance="outline" class="uf-auth-input-block">
-            <mat-label>Email</mat-label>
-            <input matInput type="email" id="email" formControlName="email" placeholder="Enter Email">
-            <mat-error>Please enter a valid email address</mat-error>
-            <mat-icon matSuffix style="margin: 0px 8px;">account_box</mat-icon>
-        </mat-form-field>
-        <br>
-        <mat-form-field appearance="outline" class="uf-auth-input-block">
-            <mat-label>Password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-            <mat-error>Password too short(minimum allowed length is 8)</mat-error>
-        </mat-form-field>
-        <br>
-        <mat-form-field appearance="outline" class="uf-auth-input-block">
-            <mat-label>Company Name</mat-label>
-            <input matInput type="text" id="name" formControlName="company"
-                placeholder="Enter the name of website or company">
-            <mat-error>Please enter company name</mat-error>
-            <mat-icon matSuffix style="margin: 0px 8px;">account_box</mat-icon>
-        </mat-form-field>
-        <br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="uf-auth-wrapper">
+                <div class="uf-auth-form">
+                    <div class="uf-auth-logo-space">
 
-        <div class="uf-auth-buttons-div">
-            <button class="uf-auth-right-button" mat-raised-button type="submit" color="primary"
-                [title]="registrationForm.valid?'Register': 'Please enter valid details to register'"
-                [disabled]='!registrationForm.valid '>
-                <span>Register</span>
-                <!-- <span> ......</span> -->
+                    </div>
+                    <div class="uf-auth-form-header">
+                        Register
+                    </div>
+                    <form (ngSubmit)="register()" [formGroup]='registrationForm' class="uf-auth-form-body">
+                        <mat-form-field appearance="legacy" class="uf-auth-input-block">
+                            <mat-label>Full Name</mat-label>
+                            <input matInput type="text" id="name" formControlName="full_name"
+                                placeholder="Enter your name">
+                            <mat-error>Please enter name</mat-error>
+                            <mat-icon matSuffix style="margin: 0px 8px;">account_box</mat-icon>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field appearance="legacy" class="uf-auth-input-block">
+                            <mat-label>Email</mat-label>
+                            <input matInput type="email" id="email" formControlName="email" placeholder="Enter Email">
+                            <mat-error>Please enter a valid email address</mat-error>
+                            <mat-icon matSuffix style="margin: 0px 8px;">account_box</mat-icon>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field appearance="legacy" class="uf-auth-input-block">
+                            <mat-label>Password</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                [attr.aria-pressed]="hide">
+                                <mat-icon style="font-size: 22px;margin-left: -15px;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                            <mat-error>Password too short(minimum allowed length is 8)</mat-error>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field appearance="legacy" class="uf-auth-input-block">
+                            <mat-label>Company Name</mat-label>
+                            <input matInput type="text" id="name" formControlName="company"
+                                placeholder="Enter the name of website or company">
+                            <mat-error>Please enter company name</mat-error>
+                            <mat-icon matSuffix style="margin: 0px 8px;">account_box</mat-icon>
+                        </mat-form-field>
+                        <br>
+                        <div class="uf-auth-buttons-div">
+                            <button class="uf-auth-right-button" mat-raised-button type="submit" color="primary"
+                                [title]="registrationForm.valid?'Register': 'Please enter valid details to register'"
+                                [disabled]='!registrationForm.valid '>
+                                <span>Register</span>
+                                <!-- <span> ......</span> -->
 
-                <mat-icon matSuffix style="margin: 0px 8px;">login</mat-icon>
-            </button>
+                                <mat-icon matSuffix style="margin: 0px 8px;">login</mat-icon>
+                            </button>
+                        </div>
+                        <br>
+                    </form>
+                    <br>
+                    <div class="uf-auth-form-footer">
+                        Already have an account? <a style="text-decoration: none;" color="primary"
+                            routerLink="/auth/">Sign
+                            in</a>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div *ngIf="registrationSuccessful">
+                Success Message
+                <!-- Registration Successful -->
+                <!-- {{message}} -->
+            </div>
+
+            <div *ngIf="!registrationSuccessful">
+                <!-- {{message}} -->
+                <div *ngIf="userActive">
+                    User is active and can log in
+                </div>
+                <div *ngIf="!userActive">
+                    User is inactive
+                </div>
+            </div>
+
         </div>
-        <br>
-    </form>
-</div>
-
-<div *ngIf="registrationSuccessful">
-    Success Message
-    <!-- Registration Successful -->
-    <!-- {{message}} -->
-</div>
-
-<div *ngIf="!registrationSuccessful">
-    <!-- {{message}} -->
-    <div *ngIf="userActive">
-        User is active and can log in
-    </div>
-    <div *ngIf="!userActive">
-        User is inactive
+        <div class="col-md-7">
+            Right Panel
+        </div>
     </div>
 </div>

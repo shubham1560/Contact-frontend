@@ -1,53 +1,56 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-5">
-            Sign in
-            <form novalidate (submit)="login()" [formGroup]="loginForm">
-                <mat-form-field appearance="outline">
-                    <mat-label>Email</mat-label>
-                    <input matInput type="email" id="email" formControlName="email" placeholder="contact@example.com">
-                    <mat-icon matSuffix style="margin: 0px 8px;">account_box</mat-icon>
-                    <mat-error>Please enter a valid email address</mat-error>
-                </mat-form-field> <br>
-                <mat-form-field appearance="outline">
-                    <mat-label>Password</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                        [attr.aria-pressed]="hide">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                    <mat-error>Password(minimum length is 8)</mat-error>
-                </mat-form-field>
-                <div>
-                    <button mat-button color="primary"
-                        routerLink="/auth/passwordreset">Forgot
-                        Password</button>
-                    <button mat-raised-button color="primary" type="submit"
-                        [title]="loginForm.valid?'login': 'Please enter a valid email and password'"
-                        [disabled]='!loginForm.valid'>
-                        <span>Login</span>
-                        <mat-icon matSuffix style="margin: 0px 8px;">login</mat-icon>
-                    </button>
+        <div class="col-md-12 uf-auth-wrapper">
+            <div class="uf-auth-form">
+                <div class="uf-auth-logo-space">
+
                 </div>
-            </form>
-            <!-- <mat-form-field appearance="outline"> -->
-                <!-- <mat-label>Email</mat-label> -->
-                <!-- <input matInput placeholder="Placeholder"> -->
-                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-                <!-- <mat-hint>Email Address</mat-hint> -->
-              <!-- </mat-form-field> -->
-              <!-- <mat-form-field appearance="outline"> -->
-                <!-- <mat-label>Password</mat-label> -->
-                <!-- <input matInput placeholder="Placeholder"> -->
-                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-                <!-- <mat-hint>Password</mat-hint> -->
-              <!-- </mat-form-field> -->
+                <div class="uf-auth-form-header">
+                    Sign in
+                </div>
+                <div class="uf-auth-form-body">
+                    <form novalidate (submit)="login()" [formGroup]="loginForm">
+                        <mat-form-field appearance="legacy" class="uf-auth-input-block">
+                            <mat-label>Email</mat-label>
+                            <input matInput type="email" id="email" formControlName="email"
+                                placeholder="contact@example.com">
+                            <mat-icon matSuffix style="margin: 0px 8px;">account_box</mat-icon>
+                            <mat-error>Please enter a valid email address</mat-error>
+                        </mat-form-field> 
+                        <br>
+                        <mat-form-field appearance="legacy" class="uf-auth-input-block">
+                            <mat-label>Password</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                [attr.aria-pressed]="hide">
+                                <mat-icon style="font-size: 22px;margin-left: -15px;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                            <mat-error>Password(minimum length is 8)</mat-error>
+                        </mat-form-field>
+                        <br>
+                        <div class="uf-auth-buttons-div">
+                            <button class="uf-auth-left-button" mat-button color="primary" routerLink="/auth/passwordreset">Forgot
+                                Password</button>
+                            <button mat-raised-button class="uf-auth-right-button" color="primary" type="submit"
+                                [title]="loginForm.valid?'login': 'Please enter a valid email and password'"
+                                [disabled]='!loginForm.valid'>
+                                <span>Login</span>
+                                <mat-icon matSuffix style="margin: 0px 8px;">login</mat-icon>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <br>
+                <div class="uf-auth-form-footer ">
+                    No Account? <a style="text-decoration: none;" color="primary" routerLink="/auth/register"> Create One</a>
+                </div>
+            </div>
         </div>
         <div class="col-md-7">
             Right panel
         </div>
     </div>
-    <!-- <button mat-button>yolo</button> -->
 
 
 </div>
