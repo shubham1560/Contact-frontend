@@ -227,9 +227,9 @@ export class DataTableComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       // console.log("called");
-      console.log(result);
-      console.log(this.data);
-      if(this.data['delete'] == true){
+      // console.log();
+      // console.log(this.data);
+      if(result){
         if (this.deleteArray.length > 0) {
           this.contactService.deleteMessages(this.deleteArray).subscribe(
             (response: any) => {
