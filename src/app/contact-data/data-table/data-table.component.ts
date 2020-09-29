@@ -203,10 +203,13 @@ export class DataTableComponent implements OnInit {
     this.ngOnInit();
   }
 
+
+  selectedMessage;
   mark(field, value, id) {
     this.tableData.forEach(element => {
       if (element["id"] == id) {
         element[field] = value;
+        this.selectedMessage = element;
       }
     });
     this.contactService.markMessage(field, value, id).subscribe(
@@ -219,7 +222,7 @@ export class DataTableComponent implements OnInit {
     if(field=="read"){
       const dialogRef = this.dialog.open(MessageDetailComponent, {
         // width: '250px',
-        data: { message: this.tableData[id]}
+        data: { message: this.selectedMessage}
       });
     }
   }

@@ -16,7 +16,7 @@ export class DomainService {
 
   base_url = this.urlService.base_url;
   base_url_domain = `${this.base_url}domain/v1/`;
-
+  base_url_domain_preference = `${this.base_url}domain_preference/v1/`
   headers = this.authService.getHeader();
   url;
   body;
@@ -25,6 +25,13 @@ export class DomainService {
     this.url = `${this.base_url_domain}domain/details/`;
     return this.httpService.get(this.url, {headers: this.headers});
   }
+
+  getUserFormDetailPreference(){
+    this.url = `${this.base_url_domain_preference}domain_preference/get/detail/`;
+    return this.httpService.get(this.url, {headers: this.headers});
+  }
+
+  // http://127.0.0.1:8000/domain_preference/v1/domain_preference/get/detail/
 
 
 }
