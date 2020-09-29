@@ -15,11 +15,20 @@ export class MessageDetailComponent implements OnInit {
     private domainService: DomainService
   ) { }
 
+  // preference;
+  preferenceArray = []
+  labelArray = []
   ngOnInit(): void {
     // console.log(this.data);
     this.domainService.getUserFormDetailPreference().subscribe(
       (response:any) =>{
-        console.log(response)
+        // this.preference = response;
+        for (const property in response) {
+          if(response[property] == true){
+            this.preferenceArray.push(property)
+            this.labelArray.push(property.toUpperCase())
+          }
+        }
       }, error => {
         console.log(error);
         
