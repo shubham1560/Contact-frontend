@@ -130,40 +130,41 @@
                                         label_important
                                     </mat-icon>
                                 </button>
-                                <button mat-icon-button class="d-inline" *ngIf="!message.important"
+                                <button mat-icon-button class="d-inline" matTooltip="Mark important" 
+                                *ngIf="!message.important"
                                     (click)="mark('important',true, message.id)">
                                     <mat-icon style="color: #272727;">
                                         label_important
                                     </mat-icon>
                                 </button>
-                                <button mat-icon-button class="d-inline" *ngIf="message.starred"
+                                <button mat-icon-button class="d-inline" *ngIf="message.starred" matTooltip="Mark starred"
                                     (click)="mark('starred', false, message.id)">
                                     <mat-icon style="color: gold">
                                         star
                                     </mat-icon>
                                 </button>
-                                <button mat-icon-button class="d-inline" *ngIf="!message.starred"
+                                <button mat-icon-button class="d-inline" *ngIf="!message.starred" matTooltip="Mark starred"
                                     (click)="mark('starred', true, message.id)">
                                     <mat-icon style="color: #272727;">
                                         star_border
                                     </mat-icon>
                                 </button>
-                                <button *ngIf="!message.read" mat-icon-button class="d-inline">
+                                <!-- <button *ngIf="!message.read" mat-icon-button class="d-inline">
                                 <mat-icon style="color: #5B6869;">lens</mat-icon>
                                     
-                                </button>
+                                </button> -->
                             </td>
                             <td (click)="mark('read', true, message.id)" class="table-row-open"
                                 *ngFor="let column of displayedColumns">
                                 <!-- {{)}} <br>   -->
                                 <span
-                                    [ngStyle]="!message.read?{'font-weight': 'bold', 'color': '#5B6869'} : {'font-weight': '100' }"
+                                    [ngStyle]="!message.read?{'font-weight': 'bold'} : {'font-weight': '100' }"
                                     *ngIf="dataType(message[column])=='date'" style="text-overflow: ellipsis;">{{message[column] | date:'short'}}</span>
-                                <span [ngStyle]="!message.read?{'font-weight': 'bold', 'color': '#5B6869'} : {'font-weight': '100'}"
+                                <span [ngStyle]="!message.read?{'font-weight': 'bold'} : {'font-weight': '100'}"
                                     *ngIf="dataType(message[column])!='date' && dataType(message[column])=='string'" style="text-overflow: ellipsis;">
                                     {{ message[column].length>40 ? (message[column] | slice:0:40)+ '...': (message[column])}}
                                 </span>
-                                <span [ngStyle]="!message.read?{'font-weight': 'bold', 'color': '#5B6869'} : {'font-weight': '100'}"
+                                <span [ngStyle]="!message.read?{'font-weight': 'bold'} : {'font-weight': '100'}"
                                     *ngIf="dataType(message[column])!='date' && dataType(message[column])!='string'" style="text-overflow: ellipsis;">
                                     {{ message[column]}}
                                 </span>
