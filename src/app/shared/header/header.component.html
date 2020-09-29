@@ -4,9 +4,9 @@
     <button mat-button color="primary" routerLink="dashboard">Dashboard</button>
     <button mat-button color="primary" routerLink="console">Console</button>
 
-    <button mat-button color="primary" routerLink="auth">Sign in</button>
+    <button mat-button color="primary" *ngIf="!isLoggedIn" routerLink="auth">Sign in</button>
     
-    <button mat-button color="primary" (click)="logout()">Sign out</button>
+    <button mat-button color="primary" *ngIf="isLoggedIn" (click)="logout()">Sign out</button>
     
     <!-- <a routerLink="dashboard">Dashboard</a>
 
