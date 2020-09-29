@@ -27,8 +27,8 @@ export class ContactService {
     return this.httpService.get(this.url, {headers: this.headers});
   }
 
-  changeUserDomainPreference(preference){
-    this.url = `${this.base_url}domain_preference/v1/domain_preference/`;
+  changeUserDomainPreference(preference, device_type){
+    this.url = `${this.base_url}domain_preference/v1/domain_preference/${device_type}/`;
     const body = preference;
     return this.httpService.post(this.url, body, {headers: this.headers})
   }
@@ -46,7 +46,7 @@ export class ContactService {
   }
 
   changeUserDomainPreferenceWindow(field, value){
-    this.url = `${this.base_url}domain_preference/v1/domain_preference/change/`;
+    this.url = `${this.base_url}domain_preference/v1/domain_preference/change/window/`;
     const body = {
       field: field,
       value: value

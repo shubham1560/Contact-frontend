@@ -40,7 +40,7 @@ export class PreferencesComponent implements OnInit {
   }
 
   changePreference(){
-    this.contactService.changeUserDomainPreference(this.preferenceForm.value).subscribe(
+    this.contactService.changeUserDomainPreference(this.preferenceForm.value, this.data.device_type).subscribe(
       (response:any)=>{
         // console.log(response);
       }

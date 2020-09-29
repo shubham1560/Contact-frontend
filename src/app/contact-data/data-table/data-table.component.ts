@@ -154,7 +154,7 @@ export class DataTableComponent implements OnInit {
 
     const dialogRef = this.dialog.open(PreferencesComponent, {
       width: '250px',
-      data: { preferences: this.preference }
+      data: { preferences: this.preference, device_type: "DLD" }
     });
 
     dialogRef.afterClosed().subscribe(result => {
