@@ -20,6 +20,7 @@ export class MessageDetailComponent implements OnInit {
   preference;
   preferenceArray = []
   labelArray = []
+  isLoading = true;
   ngOnInit(): void {
     // console.log(this.data);
     this.domainService.getUserFormDetailPreference().subscribe(
@@ -31,9 +32,10 @@ export class MessageDetailComponent implements OnInit {
             this.labelArray.push(property.toUpperCase())
           }
         }
+        this.isLoading = false;
       }, error => {
         console.log(error);
-
+        this.isLoading = false;
       }
     )
   }

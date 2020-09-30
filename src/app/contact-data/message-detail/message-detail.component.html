@@ -8,7 +8,7 @@
     </button>
 </div> 
 
-
+<div *ngIf="isLoading"> Loading....</div>
 
 <mat-dialog-content class="mat-typography">
         <div *ngFor="let property of preferenceArray" style="padding-bottom: 20px">
