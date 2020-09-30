@@ -4,35 +4,57 @@
 <mat-progress-bar *ngIf="isLoading" mode="query"></mat-progress-bar>
 <mat-progress-bar mode="determinate" value="100" *ngIf="!isLoading"></mat-progress-bar>
 <!-- Loading... -->
+<br><br><br>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6">
             <!-- <h3>Customer Details: </h3> -->
-            <mat-list role="list">
-                <div mat-subheader>Customer Details</div>
-                <mat-list-item role="listitem"> 
-                     Customer Company: {{domainDetails?.name}}
-                </mat-list-item>
-                <mat-list-item role="listitem">
-                     Active: {{domainDetails?.active}} 
-                </mat-list-item>
-                <mat-list-item role="listitem">
-                     Created On: {{domainDetails?.sys_created_on | date: 'medium'}} 
-                </mat-list-item>
-              </mat-list>
-              
+            Customer Details
+            <br> <br>
+            <table class="table table-condensed">
+
+                <tbody>
+                    <tr>
+                        <td><span style="font-weight: bolder;"> Customer Company: </span> </td>
+                        <td *ngIf="!isLoading">{{domainDetails?.name}}</td>
+                        <td *ngIf="isLoading" style="width: 200px; background-color: #f5f5f5;height: 5px;"></td>
+                    </tr>
+                    <tr>
+                        <td><span style="font-weight: bolder;">Active: </span></td>
+                        <td *ngIf="!isLoading">{{domainDetails?.active}}</td>
+                        <td *ngIf="isLoading" style="width: 200px; background-color: #f5f5f5;height: 5px;" style="width: 200px; background-color: #f5f5f5;height: 5px;"></td>
+                        <!-- <td>mary@example.com</td> -->
+                    </tr>
+                    <tr>
+                        <td><span style="font-weight: bolder;">Created On: </span> </td>
+                        <td *ngIf="!isLoading">{{domainDetails?.sys_created_on | date: 'medium'}}</td>
+                        <td *ngIf="isLoading" style="width: 200px; background-color: #f5f5f5;height: 5px;"></td>
+
+                    </tr>
+                </tbody>
+            </table>
 
         </div>
         <div class="col-md-6">
 
-             <mat-list role="list">
-                <div mat-subheader>API Details</div>
+            API Details:
+            <br><br>
+            <table class="table table-condensed">
 
-                <mat-list-item role="listitem">             
-                    Api-key: {{domainDetails?.api_key}}
-                </mat-list-item>
-              </mat-list>
-              
+                <tbody>
+                    <tr>
+                        <td>
+                            <span style="font-weight: bolder;">
+                                Api-key:
+                            </span>
+                        </td>
+                        <td *ngIf="!isLoading">{{domainDetails?.api_key}}</td>
+                        <td *ngIf="isLoading" style="width: 200px; background-color: #f5f5f5;height: 5px;"></td>
+
+                    </tr>
+                </tbody>
+            </table>
+
         </div>
     </div>
 </div>
