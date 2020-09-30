@@ -13,7 +13,7 @@ export class SignInComponent implements OnInit {
 
   loginForm: FormGroup;
   hide = true;
-
+  signingIn = false;
   constructor(
     private fb: FormBuilder,
     private cookieService: CookieService,
@@ -28,13 +28,17 @@ export class SignInComponent implements OnInit {
   }
 
   login(){
+    this.signingIn = true;
     this.authService.loginRoot(this.loginForm.value['email'], this.loginForm.value['password']).subscribe(
       (response:any)=>{
         this.cookieService.set('token', response.token);
         // this.cookieService.zzz
         localStorage.setItem('token', response.token);
         window.location.href="dashboard";
+        this.signingIn = false;
         // console.log(response);
+      }, error=>{
+        this.signingIn = false;
       }
     )
     // console.log(this.loginForm);

@@ -35,7 +35,10 @@
                 <button mat-menu-item (click)="changeMessageType('all')" matTooltip="Show all messages"
                     matTooltipPosition="right"
                     [ngStyle]="messageType == 'all'?{'font-weight': 'bold'} : {'font-weight': '100'}"
-                    style="line-height: 20px; height: 30px;">All</button>
+                    style="line-height: 20px; height: 30px;">
+                    <!-- <input type="checkbox" id="mastercheck" class="check"> -->
+                    All
+                </button>
                 <button mat-menu-item (click)="changeMessageType('important')" matTooltip="Show important messages"
                     matTooltipPosition="right"
                     [ngStyle]="messageType == 'important'?{'font-weight': 'bold'} : {'font-weight': '100'}"

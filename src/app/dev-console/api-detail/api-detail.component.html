@@ -7,14 +7,32 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6">
-            <b> Customer Details: </b><br>
-            <b> Customer Company: </b>{{domainDetails?.name}} <br>
-            <b> Active: </b>{{domainDetails?.active}} <br>
-            <b> Created On: </b>{{domainDetails?.sys_created_on | date: 'medium'}} <br>
+            <!-- <h3>Customer Details: </h3> -->
+            <mat-list role="list">
+                <div mat-subheader>Customer Details</div>
+                <mat-list-item role="listitem"> 
+                     Customer Company: {{domainDetails?.name}}
+                </mat-list-item>
+                <mat-list-item role="listitem">
+                     Active: {{domainDetails?.active}} 
+                </mat-list-item>
+                <mat-list-item role="listitem">
+                     Created On: {{domainDetails?.sys_created_on | date: 'medium'}} 
+                </mat-list-item>
+              </mat-list>
+              
 
         </div>
         <div class="col-md-6">
-            <b> Api-key: </b> {{domainDetails?.api_key}}
+
+             <mat-list role="list">
+                <div mat-subheader>API Details</div>
+
+                <mat-list-item role="listitem">             
+                    Api-key: {{domainDetails?.api_key}}
+                </mat-list-item>
+              </mat-list>
+              
         </div>
     </div>
 </div>
