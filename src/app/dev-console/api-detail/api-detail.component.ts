@@ -13,10 +13,12 @@ export class ApiDetailComponent implements OnInit {
   ) { }
 
   domainDetails;
+  isLoading = true;
 
   ngOnInit(): void {
     this.domainService.getUserDomainDetails().subscribe(
       (response:any)=>{
+        this.isLoading = false;
         console.log(response);
         this.domainDetails = response;
       }

@@ -1,16 +1,20 @@
 <!-- <pre>
     {{ domainDetails | json}}
 </pre> -->
+<mat-progress-bar *ngIf="isLoading" mode="query"></mat-progress-bar>
+<mat-progress-bar mode="determinate" value="100" *ngIf="!isLoading"></mat-progress-bar>
+<!-- Loading... -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <b> Customer Details: </b><br>
+            <b> Customer Company: </b>{{domainDetails?.name}} <br>
+            <b> Active: </b>{{domainDetails?.active}} <br>
+            <b> Created On: </b>{{domainDetails?.sys_created_on | date: 'medium'}} <br>
 
-<div class="row">
-    <div class="col-md-6">
-        <b> Customer Details: </b><br>
-        <b> Customer Company: </b>{{domainDetails?.name}} <br>
-        <b> Active: </b>{{domainDetails?.active}} <br>
-        <b> Created On: </b>{{domainDetails?.sys_created_on | date: 'medium'}} <br>
-
-    </div>
-    <div class="col-md-6">
-       <b> Api-key: </b> {{domainDetails?.api_key}}
+        </div>
+        <div class="col-md-6">
+            <b> Api-key: </b> {{domainDetails?.api_key}}
+        </div>
     </div>
 </div>
